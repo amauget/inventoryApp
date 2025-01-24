@@ -26,7 +26,11 @@
             <button class="submit">Update Filters</button>
         </form>
 
-       
+        <div class="results">
+            <% results.forEach(item => { %>
+            <%- include('partials/item', { item })%>
+            <%})%>
+        </div>
     </div>
 </body>
 </html>

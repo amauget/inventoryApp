@@ -4,12 +4,12 @@ const router = Router()
 const {sortFilters} = require('../controllers/controller')
 
 router.get('/', async (req, res) => {
-    let filters = req.query //object with different filters (ie. category, year, make, etc)
-    const results = await sortFilters(filters)
+    const results = await sortFilters(req, res)
     
     //const make = req.query.make
     /* Implement first filter, then add others.. */
-    res.render('index', /* { results: results } */)
+    console.log(results)
+    res.render('index', { results: results })
 })
 
 router.get('/category', async (req, res) => {
