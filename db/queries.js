@@ -3,6 +3,7 @@ const buildQuery = require('./buildQuery')
 
 //functions go here..
 async function filterCategory(filters){
+    console.log(filters)
     //add conditions to eventually allow for all datatypes to be filtered.
     const queryData = buildQuery(filters)
     let query = queryData[0]
@@ -15,6 +16,7 @@ async function filterCategory(filters){
         else{
             result = await pool.query(query, [...args]) //MAKE SURE SPREADER SYNTAX USED.. OTHERWISE NESTED ARRAY COUNTS AS SINGLE ARG.
         }
+        //Add handler for empty results.
         return result.rows
     }
     catch(err){
@@ -23,5 +25,7 @@ async function filterCategory(filters){
         return result.rows
     }   
 }
+
+
 
 module.exports = {filterCategory}

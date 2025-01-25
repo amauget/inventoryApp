@@ -16,21 +16,29 @@
 
             
             <select name="category" id="category">
-                <option value="*">All Options</option>
+                <option value='*'>All Options</option>
                 <option value="domestic">Domestic</option>
                 <option value="jdm">JDM</option>
                 <option value="euro">Euro</option>
+            </select>
+
+            <select name="make" id="make">
+                <option value="*">All Makes</option>
+                <option value="Chevrolet">Chevrolet</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Mercedes">Mercedes</option>
             </select>
             
 
             <button class="submit">Update Filters</button>
         </form>
 
-        <div class="results">
-            <% results.forEach(item => { %>
-            <%- include('partials/item', { item })%>
-            <%})%>
-        </div>
+        <a href="/addCar">Click to Add a Car!</a>
+    </div>
+    <div class="results">
+        <% results.forEach(item => { %>
+        <%- include('partials/item', { item })%>
+        <%})%>
     </div>
 </body>
 </html>

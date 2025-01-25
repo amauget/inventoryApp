@@ -2,14 +2,15 @@
     <h1><%= item.year %></h1>
     <h1><%= item.make %> <%= item.model%></h1>
     <img class="carImg" src= <%= item.img[0] %> alt="image from array">
-    <p>Description</p>
+    <p><%= item.description %></p>
     <h3>Price</h3>
 
     <ul>
-        <li class="bulletPoints">Year</li>
-        <li class="bulletPoints">Make</li>
-        <li class="bulletPoints">Model</li>
-        <li class="bulletPoints">Drive</li>
+        <li class="bulletPoints">Year <%= item.year %></li>
+        <li class="bulletPoints">Make <%= item.make %></li>
+        <li class="bulletPoints">Model <%= item.model %></li>
+        <li class="bulletPoints">Drive <%= item.drive %></li>
+        <li class="bulletPoints">Price $<%= item.price %></li>
     </ul>
 
     <!-- {category, year, make, drive, price, model} -->

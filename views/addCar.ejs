@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Add Car</title>
+</head>
+<body>
+    <a href="/">
+        <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
+    </a>
+    <h1>Post your Classic!</h1>
+    <p>Car must have been manufactured before the year 2000 to be posted on our site.</p>
+
+    <form action="/" method="post">
+        <label for="year">Year: </label>
+        <input type="number" min=1905 max=2000 required>
+
+        <select name="make" id="makeInput">
+            <% allMakes.forEach(item =>{ %>
+                <option value=<%= item %>> <%= item %></option>
+           <%}) %>
+
+        </select>
+
+        <button>Submit</button>
+
+        <!--
+            YEAR
+            MAKE
+            MODEL
+            DRIVE
+            DESCRIPTION
+            PRICE
+            IMG
+        -->
+    </form>
+   
+
+</body>
+</html>
