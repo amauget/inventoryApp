@@ -1,0 +1,217 @@
+make,model,yearrange
+Cadillac,Calais,1965-1976
+Cadillac,Eldorado,1967-2000
+Cadillac,DeVille,1977-2000
+Cadillac,Seville,1975-2000
+Cadillac,Fleetwood,1965-1996
+Cadillac,Brougham,1980-1992
+Cadillac,Allante,1987-1993
+Cadillac,Catera,1997-2000
+Buick,Special,1965-1969
+Buick,Skylark,1965-1998
+Buick,LeSabre,1965-2000
+Buick,Wildcat,1965-1970
+Buick,Electra,1966-1990
+Buick,Riviera,1966-1993
+Buick,Century,1973-2000
+Buick,Regal,1973-2000
+Buick,Park Avenue,1991-2000
+Buick,Reatta,1988-1991
+Buick,Roadmaster,1991-1996
+Buick,Skylark,1962-1970
+Chevrolet,Corvair,1965-1969
+Chevrolet,Chevelle,1965-1977
+Chevrolet,Nova,1965-1979
+Chevrolet,Camaro,1967-2000
+Chevrolet,Impala,1965-1985
+Chevrolet,Caprice,1965-1996
+Chevrolet,Malibu,1965-1983
+Chevrolet,Monte Carlo,1970-1988
+Chevrolet,Vega,1971-1977
+Chevrolet,Citation,1980-1985
+Chevrolet,Celebrity,1982-1990
+Chevrolet,Cavalier,1982-2000
+Chevrolet,Corsica,1987-1996
+Chevrolet,Lumina,1989-2000
+Chevrolet,Beretta,1987-1996
+Chevrolet,Caprice,1991-1996
+Chevrolet,Lumina APV,1990-1996
+Chevrolet,Impala SS,1994-1996
+Chevrolet,Monte Carlo SS,1995-1999
+Chevrolet,C/K Series,1965-2000
+Chevrolet,Cheyenne,1971-1998
+Chevrolet,Scottsdale,1971-1989
+Chevrolet,Silverado,1998-2000
+Chevrolet,S-10,1982-2000
+Chevrolet,LUV,1972-2000
+Ford,Mustang,1965-2000
+Ford,F-100,1965-1983
+Ford,F-150,1975-1996
+Ford,Thunderbird,1965-1997
+Ford,LTD,1965-1986
+Ford,Torino,1968-1976
+Ford,Pinto,1971-1980
+Ford,Maverick,1970-1979
+Ford,Granada,1975-1982
+Ford,Fairmont,1978-1983
+Ford,LTD Crown,1980-1992
+Ford,Taurus,1986-2000
+Dodge,Dart,1965-1976
+Dodge,Charger,1966-2000
+Dodge,Coronet,1965-1976
+Dodge,Polara,1965-1973
+Dodge,Monaco,1965-1978
+Dodge,Challenger,1970-1974
+Dodge,Demon,1971-1972
+Dodge,Diplomat,1977-1989
+Dodge,Mirada,1980-1983
+Dodge,Aries,1981-1989
+Dodge,Omni,1977-1990
+Dodge,Daytona,1984-1993
+Dodge,Spirit,1989-1995
+Dodge,Intrepid,1993-2000
+Dodge,Neon,1994-2000
+Dodge,Avenger,1995-2000
+Dodge,Durango,1998-2000
+Chrysler,Newport,1961-1981
+Chrysler,New Yorker,1965-1996
+Chrysler,300,1965-1971
+Chrysler,Imperial,1965-1975
+Chrysler,LeBaron,1977-1995
+Chrysler,Cordoba,1975-1983
+Chrysler,Fifth Avenue,1983-1989
+Chrysler,Conquest,1984-1989
+Chrysler,Laser,1984-1986
+Chrysler,Daytona,1984-1993
+Chrysler,TC by Maserati,1989-1991
+Chrysler,Imperial,1990-1993
+Chrysler,Concorde,1993-2000
+Chrysler,LHS,1994-2000
+Chrysler,Sebring,1995-2000
+Chrysler,Cirrus,1995-2000
+Chrysler,300M,1998-2000
+Toyota, Corona,1965-2000
+Toyota, Corolla,1966-2000
+Toyota, Crown,1965-2000
+Toyota, Celica,1970-2000
+Toyota, Carina,1970-2000
+Toyota, HiLux,1968-2000
+Toyota, Land Cruiser,1965-2000
+Toyota, Starlet,1973-1999
+Toyota, Camry,1982-2000
+Toyota, 4Runner,1984-2000
+Toyota, Supra,1978-2000
+Toyota, Cressida,1977-1992
+Toyota, MR2,1984-1999
+Toyota, Tercel,1978-2000
+Lexus,LS,1989-2000
+Lexus,ES,1989-2000
+Lexus,SC,1991-2000
+Lexus,GS,1993-2000
+Lexus,RX,1998-2000
+Lexus,LX,1995-2000
+Lexus,NX,2014-2000
+Lexus,IS,1998-2000
+Lexus,RC,2014-2000
+Lexus,GX,2002-2000
+Mercedes,220SE,1965-1976
+Mercedes,230SL,1965-1967
+Mercedes,300SEL,1965-1972
+Mercedes,280SE,1965-1973
+Mercedes,600,1964-1981
+Mercedes,450SEL,1972-1980
+Mercedes,300SD,1978-1981
+Mercedes,300SLC,1968-1971
+Mercedes,280SE,1972-1981
+Mercedes,500SEL,1980-1991
+Mercedes,300SL,1985-1989
+Mercedes,560SEL,1985-1991
+Mercedes,300CE,1989-1992
+Mercedes,300E,1984-1993
+Mercedes,500E,1990-1995
+Mercedes,C-Class,1993-2000
+Mercedes,E-Class,1993-2000
+Mercedes,S-Class,1991-2000
+Nissan, Bluebird,1959-2000
+Nissan, Cedric,1960-2000
+Nissan, Skyline,1957-2000
+Nissan, Sunny,1966-2000
+Nissan, Laurel,1968-2000
+Nissan, Fairlady Z,1969-2000
+Nissan, Silvia,1965-2000
+Nissan, Patrol,1951-2000
+Nissan, Stanza,1977-1992
+Nissan, Maxima,1981-2000
+Nissan, 300ZX,1983-2000
+Nissan, Pathfinder,1985-2000
+Nissan, Sentra,1982-2000
+Nissan, Micra,1982-2000
+Nissan, Altima,1992-2000
+BMW,1600,1964-1968
+BMW,2002,1968-1976
+BMW, 3.0 CSL,1972-1975
+BMW, 320i,1975-1982
+BMW, 520i,1972-1981
+BMW, 635 CSi,1976-1989
+BMW, M1,1978-1981
+BMW, 325i,1985-1991
+BMW, 535i,1985-1993
+BMW, M5,1984-1992
+BMW, Z1,1989-1991
+BMW, 850i,1990-1999
+BMW, 318i,1991-2000
+BMW, 323i,1996-2000
+BMW, M3,1992-2000
+BMW, Z3,1995-2000
+Audi,100,1968-1976
+Audi,80,1972-1996
+Audi,50,1974-1978
+Audi,90,1984-1995
+Audi, Quattro,1980-1991
+Audi,4000,1980-1987
+Audi,5000,1983-1988
+Audi, V8,1988-1994
+Audi, A4,1994-2000
+Audi, A6,1994-2000
+Audi, A8,1994-2000
+Audi, TT,1994-2000
+Ferrari, 275 GTB,1964-1968
+Ferrari, 330 GTC,1966-1968
+Ferrari, Dino 206 GT,1967-1969
+Ferrari, 365 GTB/4,1968-1973
+Ferrari, 246 GT Dino,1969-1974
+Ferrari, 308 GTB,1975-1980
+Ferrari, 512 BB,1976-1984
+Ferrari, 400i,1979-1985
+Ferrari, Mondial,1980-1993
+Ferrari, 288 GTO,1984-1986
+Ferrari, Testarossa,1984-1996
+Ferrari,348,1989-1995
+Ferrari, F40,1987-1992
+Ferrari, 456 GT,1992-2000
+Ferrari,355,1994-1999
+Ferrari, 550 Maranello,1996-2000
+Lamborghini, 350 GT,1964-1966
+Lamborghini, Miura,1966-1973
+Lamborghini, Espada,1968-1978
+Lamborghini, Islero,1968-1970
+Lamborghini, Jarama,1970-1976
+Lamborghini, Urraco,1972-1979
+Lamborghini, Countach,1974-1990
+Lamborghini, Jalpa,1981-1988
+Lamborghini, LM002,1986-1993
+Lamborghini, Diablo,1990-2000
+Volkswagen, New Beetle,1997-2000
+Volkswagen, Sharan,1995-2000
+Volkswagen, Polo,1975-2000
+Volkswagen, Corrado,1988-1995
+Volkswagen, Vanagon,1980-1991
+Volkswagen, Jetta,1979-2000
+Volkswagen, Rabbit,1975-1984
+Volkswagen, Scirocco,1974-1992
+Volkswagen, Golf,1974-2000
+Volkswagen, Passat,1973-2000
+Volkswagen, Type 3,1961-1973
+Volkswagen, Karmann Ghia,1955-1974
+Volkswagen, Type 2 (Bus),1950-1979
+Volkswagen, Beetle,1938-2003

@@ -20,10 +20,11 @@ function buildQuery(filters){
             args.push(filters[columns[i]])
         }
     }
-    console.log(args)
-    if(args.length === 1 && args[0] === '*'){
+    
+    if(args.length === 0 /* || args[0] === '*' */){
         query = 'SELECT * FROM cars'
     }
+  
     return [query += ';', args]
     
 }

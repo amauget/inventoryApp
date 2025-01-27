@@ -11,19 +11,31 @@
         <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
     </a>
     <h1>Post your Classic!</h1>
-    <p>Car must have been manufactured before the year 2000 to be posted on our site.</p>
+    <p>Car must have been manufactured before the year 2001 to be posted on our site.</p>
 
-    <form action="/" method="post">
-        <label for="year">Year: </label>
-        <input type="number" min=1905 max=2000 required>
+    <form class="carForm" action="/" method="post">
+        <select name="year" id="year" onclick=selectedYear()>
+            <% for(let i = 1965; i < 2001; i++){ %>
+                <option value=<%=i%>><%=i%></option>
+            <%} %>
+        </select>
 
+        
         <select name="make" id="makeInput">
-            <% allMakes.forEach(item =>{ %>
-                <option value=<%= item %>> <%= item %></option>
-           <%}) %>
+            <!-- if Statement unlocking make options -->
+            <option value="make">Make</option>
+            <% if(results.year !== undefined){ %>
+                <% allMakes.forEach(item =>{ %>
+                    <option value=<%= item.make %>> <%= item.make %></option>
+                <%}) %>
+            <%} %>
+           
 
         </select>
 
+        <select name="model" id="model">Model
+            <option value="model">Model</option>
+        </select>
         <button>Submit</button>
 
         <!--
@@ -36,7 +48,23 @@
             IMG
         -->
     </form>
+    <button onclick=selectedYear()>test</button>
    
 
 </body>
+
+<script>
+    
+    function selectedYear(){
+        const form = document.querySelector('.carForm')
+        const year = document.querySelector('#year').value
+        console.log(year)
+
+        form.action = '/addCar'
+        form.method = 'GET'
+
+        form.submit()
+        
+    }
+</script>
 </html>
