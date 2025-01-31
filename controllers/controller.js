@@ -14,9 +14,8 @@ async function sortFilters(req, res){
 async function postCar(req, res){
     //add logic to generate category based on make
     const data = {year: req.query.year, make: req.query.make}
-    let suggested = undefined
 
-    suggested = await db.createOptions(data)
+    const suggested = await db.createOptions()
     console.log(suggested)
     const cleanupMake = reduceMake(suggested)
     console.log(cleanupMake)

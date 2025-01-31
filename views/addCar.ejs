@@ -7,6 +7,7 @@
     <title>Add Car</title>
 </head>
 <body>
+
     <a href="/">
         <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
     </a>
@@ -14,57 +15,93 @@
     <p>Car must have been manufactured before the year 2001 to be posted on our site.</p>
 
     <form class="carForm" action="/" method="post">
-        <select name="year" id="year" onclick=selectedYear()>
+        <select class="year" name="year" id="year" onclick=sortMake(event.target.value)>
+            <option value="year">Year</option>
             <% for(let i = 1965; i < 2001; i++){ %>
                 <option value=<%=i%>><%=i%></option>
             <%} %>
         </select>
 
         
-        <select name="make" id="makeInput">
+        <select class="make" name="make" id="makeInput" onclick=sortModel(event.target.value)>
             <!-- if Statement unlocking make options -->
             <option value="make">Make</option>
-            <% if(results.year !== undefined){ %>
-                <% allMakes.forEach(item =>{ %>
-                    <option value=<%= item.make %>> <%= item.make %></option>
-                <%}) %>
-            <%} %>
-           
-
         </select>
 
-        <select name="model" id="model">Model
+        <select class="model" name="model" id="model">Model 
             <option value="model">Model</option>
         </select>
         <button>Submit</button>
-
-        <!--
-            YEAR
-            MAKE
-            MODEL
-            DRIVE
-            DESCRIPTION
-            PRICE
-            IMG
-        -->
     </form>
-    <button onclick=selectedYear()>test</button>
+
+    <p class="data"> <%= JSON.stringify(results) %></p> <!-- allows for front end data manipulation. Display = "none" -->
    
 
 </body>
 
 <script>
-    
-    function selectedYear(){
-        const form = document.querySelector('.carForm')
-        const year = document.querySelector('#year').value
-        console.log(year)
+    const carElement = document.querySelector('.data')
+    const carData = JSON.parse(carElement.textContent) // immutible global
 
-        form.action = '/addCar'
-        form.method = 'GET'
 
-        form.submit()
+    function sortMake(year){
+        if(year !== 'year'){
+            const makeSelect = document.querySelector('.make')
+            
+            let makes = {}
+            let options = []
+            
+            carData.forEach((item) =>{
+                let first = parseInt(item.yearrange[0] + item.yearrange[1] + item.yearrange[2] + item.yearrange[3])
+                let last = parseInt(item.yearrange[5] + item.yearrange[6] + item.yearrange[7] + item.yearrange[8])
+                
+                if((first <= year && last >= year) && makes[item.make] === undefined ){
+                    makes[item.make] = true
+                    options.push(item.make)
+                }
+            })
+
+            options.sort()
+
+            wipeOptions(['make', 'model'])
+            createOptions(makeSelect, options)
+        }
+    }
+
+    function sortModel(make){
+        let modelSelect = document.querySelector('.model')
+        let models = []
         
+        carData.forEach(item =>{
+            if(item.make === make){
+                models.push(item.model)
+            }
+        })
+        models.sort()
+
+        wipeOptions(['model']) //preserves 'make' options
+        createOptions(modelSelect, models)
+    }
+
+    function wipeOptions(elements){
+        elements.forEach(element =>{
+            let parent = document.querySelector(`.${element}`)
+            
+            let OGoption = parent[0] //Preserves make/model default "option" 
+            parent.innerHTML = '' //removes any residual options
+            parent.appendChild(OGoption) //appends make/model "option"
+        })
+    }
+
+    function createOptions(parent, array){        
+        array.map(item =>{
+                let makeElement = document.createElement('option')
+                makeElement.value = item
+                makeElement.textContent = item
+                makeElement.name = item
+
+                parent.appendChild(makeElement)
+            })
     }
 </script>
 </html>

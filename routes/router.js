@@ -22,16 +22,7 @@ router.get('/category', async (req, res) => {
 })
 
 router.get('/addCar', async (req, res) => {
-    // console.log(req.query)
-    const reqData = req.query
-    const carData = {
-        year: reqData.year, 
-        make: reqData.make, 
-        model: reqData.model
-    }
-
-    const results = postCar(req, res)
-    console.log(results)
+    const results = await postCar(req, res)
     res.render('addCar', { results })
 })
 

@@ -24,22 +24,9 @@ async function filterCategory(filters){
     }   
 }
 
-async function createOptions({ year, make }){ //only call if a year has been selected.
-    console.log(year)
-
-    let args = [year] 
-    let prompt = `SELECT * FROM make_models 
-        WHERE CAST(SPLIT_PART(yearrange, '-', 1) AS INTEGER) <= $1
-        AND CAST(SPLIT_PART(yearrange, '-', 2) AS INTEGER) >= $1
-        `
-    if(make !== 'make'){
-        prompt += 'AND make = $2'
-        args.push(make)
-    }
-    prompt += ';'
-
-    const result = await pool.query(prompt, args)
-    console.log(result.rows)
+async function createOptions(){ //only call if a year has been selected.
+    const result = await pool.query('SELECT * FROM make_models')
+ 
     return result.rows    
 }
 
