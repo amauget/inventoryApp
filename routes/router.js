@@ -27,8 +27,15 @@ router.get('/addCar', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+    console.log(req)
+    console.log(req.body.imgUpload)
     //audit entries
     //process to add new car to database or reject entry
+
+    /* corner cases
+        ensure there only 10 images allowed
+        compare inputs being posted to car_collection db.. prevent filter function alterations on front end from causing problems
+    */
 })
 
 module.exports = router

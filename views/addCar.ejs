@@ -28,11 +28,35 @@
             <option value="make">Make</option>
         </select>
 
-        <select class="model" name="model" id="model">Model 
+        <select class="model" name="model" id="modelInput" required>
+            <!-- if Statement unlocking make options -->
             <option value="model">Model</option>
         </select>
+
+        <label for="auto">Automatic: </label>
+        <input id="auto" name='auto' type="radio" value="automatic" onclick=handleCheck(event.target.id)>
+        <label for="manual">Manual: </label>
+        <input id="manual" name="manual" type="radio" value="manual" onclick=handleCheck(event.target.id)>
+
+        <label for="price">Asking Price USD: </label>
+        <input id="price" type="number" step=".01" min='1000'> <!-- ADD REQUIRED -->
+
+        <label for="description">Description: </label>
+        <textarea name="description" id="description"></textarea> <!-- ADD REQUIRED -->
+
+        <label for="imgUpload">Upload Images of your ride:</label>
+        <input name="imgUpload"type="file" id="imgUpload" accept="image/*" onchange=previewPhoto(event.target) class="img1"> <!-- add an image previewer -->
+
+
+        <div class="imageContainer">
+
+            <img src="#" alt="Preview of Uploaded Img" id="imgPreview" class="img1">
+        </div>
+
         <button>Submit</button>
     </form>
+    <button class="addPhoto" onclick=addPhoto()>Add Additional Photo</button> <!-- removed from form to prevent submit -->
+
 
     <p class="data"> <%= JSON.stringify(results) %></p> <!-- allows for front end data manipulation. Display = "none" -->
    
@@ -103,5 +127,61 @@
                 parent.appendChild(makeElement)
             })
     }
+
+    function handleCheck(target){
+        let uncheckId = ''
+
+        if(target === 'auto'){
+            uncheckId = 'manual'
+        }
+        else{
+            uncheckId = 'auto'
+        }
+        const targetRadio = document.querySelector(`#${uncheckId}`)
+        targetRadio.checked = false
+    }
+
+    function addPhoto(){
+        const imageContainer = document.querySelector('.imageContainer')
+        const imageUpload = document.querySelectorAll('#imageUpload')
+
+
+            const uploadImg = document.createElement('input')
+            uploadImg.type = 'file'
+            uploadImg.id = 'imageUpload'
+            uploadImg.className = `upload${imageUpload.length}` // ties the file input to its corresponding image preview
+            
+
+            imageContainer.append(uploadImg)
+
+       
+    }
+
+    function previewPhoto(target){ //takes in img upload input element
+        const file = target.files;
+        console.log(file)
+        const number = target.className[target.className.length - 1]
+        if(file){
+            const fileReader = new FileReader();
+            let imgPreview = document.createElement('img')
+            imgPreview.id = 'imgPreview'
+            imgPreview.alt="Preview of Uploaded Img"
+
+            fileReader.onload = event => {
+                imgPreview.setAttribute('src', event.target.result);
+            }
+            imgPreview.src = fileReader.readAsDataURL(file[0]);
+
+            console.log(target)
+            const parent = document.querySelector('.imageContainer')
+            console.log(parent)
+            parent.appendChild(imgPreview)
+        }
+
+        
+        
+    }
+    
+    
 </script>
 </html>
