@@ -162,6 +162,7 @@
         const number = event.target.className[event.target.className.length - 1]
         if(file){
             const singleContainer = document.createElement('div')
+            singleContainer.id = 'singleContainer'
             singleContainer.className = 'singleContainer' + number // same number as associated file and components
 
             const imgPreview = document.createElement('img')
@@ -172,8 +173,9 @@
             createSrc(imgPreview, file) //sets img src
             
             const deleteBtn = document.createElement('p')
+            deleteBtn.id = 'deleteBtn'
             deleteBtn.className = 'delete' + number
-            deleteBtn.textContent = "X"
+            deleteBtn.textContent = "Remove"
             deleteBtn.onclick = handleDelete
             
             singleContainer.append(imgPreview, deleteBtn)

@@ -2,7 +2,7 @@ function buildQuery(filters){
     let query = 'SELECT * FROM cars WHERE'
     let args = []
     let firstFilter = true
-    let columns = ['category', 'year', 'make', 'model', 'drive', 'price', 'description', 'img', 'model']
+    let columns = ['category', 'year', 'make', 'model', 'trans', 'price', 'description', 'imgpath', 'model']
     let colLength = 9
 
     let dollar = 1

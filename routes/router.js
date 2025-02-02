@@ -5,13 +5,14 @@ const multer = require('multer')
 
 const {sortFilters, postCar} = require('../controllers/controller')
 const makes = require('../db/makes')
+const { privateDecrypt } = require('node:crypto')
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/uploads')
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)) //rename file to include date.. avoids naming collisions
+        cb(null, crypto.randomUUID()+ path.extname(file.originalname)) //scrub filename and path
     }
 })
 
@@ -39,18 +40,21 @@ router.get('/addCar', async (req, res) => {
     res.render('addCar', { results })
 })
 
-router.post('/',/*  upload.single('imgUpload'),  */async (req, res) => { /* MAJOR SECURITY CONCERNS */
-    //Take below later
-    console.log(req)
+router.post('/', upload.array('imgUpload', 10), async (req, res) => { /* MAJOR SECURITY CONCERNS */
+    console.log(req.files)
+    if(!req.files || req.files.length === 0){
+        return res.status(400).json({error: 'No files uploaded'})
+    }
+    const uploadedFiles = req.files.map(file =>({
+        fileName: file.fileName,
+        path: `uploads/${file.fileName}`
+    })
+    )
+    console.log(uploadedFiles)
     const results = await postCar(req, res)
+    
     res.render('addCar', { results })
-    //audit entries
-    //process to add new car to database or reject entry
 
-    /* corner cases
-        ensure there only 10 images allowed
-        compare inputs being posted to car_collection db.. prevent filter function alterations on front end from causing problems
-    */
 })
 
 module.exports = router

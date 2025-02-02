@@ -11,7 +11,8 @@ async function sortFilters(req, res){
 }
 
 async function postCar(req, res){
-     const body = {  
+    const body = req.body
+     const bodyelements = {  
             year: '1965',
             make: 'Cadillac',
             model: 'model',
@@ -30,6 +31,16 @@ async function postCar(req, res){
                 size: 173640
           }
         ]
+        const postComponent = {
+            category: 'TBD',
+            year: body.year,
+            make: body.make,
+            trans: body.trans,
+            description: body.description,
+            imgpath: 'TBD',
+            model: body.model
+    
+        }
     const suggested = await db.createOptions()
 
     return suggested
