@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styles/addCar.css">
+
     <title>Add Car</title>
 </head>
 <body>
+    <div class="header">
+        <a href="/">
+            <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
+        </a>
+        <h1 class="title">Get the Best Offers with Classic Car Depot</h1>
+    </div>
+   
 
-    <a href="/">
-        <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
-    </a>
-    <h1>Post your Classic!</h1>
-    <p>Car must have been manufactured before the year 2001 to be posted on our site.</p>
-
-    <form class="carForm" action="/" method="post">
+    <form class="carForm" action="/" method="post" enctype="multipart/form-data">
+        <h1 class="formTitle">Tell us about your ride!</h1>
         <select class="year" name="year" id="year" onclick=sortMake(event.target.value)>
             <option value="year">Year</option>
             <% for(let i = 1965; i < 2001; i++){ %>
@@ -33,34 +36,43 @@
             <option value="model">Model</option>
         </select>
 
-        <label for="auto">Automatic: </label>
-        <input id="auto" name='auto' type="radio" value="automatic" onclick=handleCheck(event.target.id)>
-        <label for="manual">Manual: </label>
-        <input id="manual" name="manual" type="radio" value="manual" onclick=handleCheck(event.target.id)>
-
-        <label for="price">Asking Price USD: </label>
-        <input id="price" type="number" step=".01" min='1000'> <!-- ADD REQUIRED -->
-
-        <label for="description">Description: </label>
-        <textarea name="description" id="description"></textarea> <!-- ADD REQUIRED -->
-
-        <label for="imgUpload">Upload Images of your ride:</label>
-        <input name="imgUpload"type="file" id="imgUpload" accept="image/*" onchange=previewPhoto(event.target) class="img1"> <!-- add an image previewer -->
-
-
-        <div class="imageContainer">
-
-            <img src="#" alt="Preview of Uploaded Img" id="imgPreview" class="img1">
+        <div class="radioContainer">
+            <h4 class="radioTitle">Transmission:</h4>
+            <label id="autoLabel" for="auto">Automatic: </label>
+            <input id="auto" name='trans' type="radio" value="automatic" onclick=handleCheck(event.target.id)>
+    
+            <label id="manualLabel" for="manual">Manual: </label>
+            <input id="manual" name="trans" type="radio" value="manual" onclick=handleCheck(event.target.id)>
+    
         </div>
 
-        <button>Submit</button>
+        <div class="priceContainer">
+            <label id="priceLabel" for="price">Asking Price USD: </label>
+            <input id="price" type="number" step=".01" min='1000'> <!-- ADD REQUIRED -->
+    
+        </div>
+
+        <label id="descriptionLabel" for="description">Description: </label>
+        <textarea name="description" id="description"></textarea> <!-- ADD REQUIRED -->
+
+        <div class="fileContainer">
+            <label id="imgUploadLabel"for="imgUpload">Upload Images of your ride:</label>
+            <input name="imgUpload" type="file" id="imgUpload" accept="image/*" onchange=previewPhoto(event.target) class="file1"> <!-- add an image previewer -->    
+        </div>
+
+        <div class="imgContainer"></div> <!-- uploaded imgs will append here to viewing -->
+
+        <button class="submit">Submit</button>
     </form>
-    <button class="addPhoto" onclick=addPhoto()>Add Additional Photo</button> <!-- removed from form to prevent submit -->
+    <button class="addFile" onclick=addFile()>Add Additional Photo</button> <!-- removed from form to prevent submit -->
 
 
     <p class="data"> <%= JSON.stringify(results) %></p> <!-- allows for front end data manipulation. Display = "none" -->
    
+    <div class="footer">
+        <p class="disclaimer">Car must have been manufactured before the year 2001 to be posted on our site.</p>
 
+    </div>
 </body>
 
 <script>
@@ -141,47 +153,78 @@
         targetRadio.checked = false
     }
 
-    function addPhoto(){
-        const imageContainer = document.querySelector('.imageContainer')
-        const imageUpload = document.querySelectorAll('#imageUpload')
+    function previewPhoto(){ 
+        const fileElement = event.target
+        fileElement.id = 'hideFile' //hide uploaded file w/ css
+        addFile() //add new input
 
-
-            const uploadImg = document.createElement('input')
-            uploadImg.type = 'file'
-            uploadImg.id = 'imageUpload'
-            uploadImg.className = `upload${imageUpload.length}` // ties the file input to its corresponding image preview
-            
-
-            imageContainer.append(uploadImg)
-
-       
-    }
-
-    function previewPhoto(target){ //takes in img upload input element
-        const file = target.files;
-        console.log(file)
-        const number = target.className[target.className.length - 1]
+        const file = fileElement.files
+        const number = event.target.className[event.target.className.length - 1]
         if(file){
-            const fileReader = new FileReader();
-            let imgPreview = document.createElement('img')
+            const singleContainer = document.createElement('div')
+            singleContainer.className = 'singleContainer' + number // same number as associated file and components
+
+            const imgPreview = document.createElement('img')
             imgPreview.id = 'imgPreview'
             imgPreview.alt="Preview of Uploaded Img"
+            imgPreview.className = 'img' + number //file input = 'file' + # --- imgPreview = 'img' + # --- deleteBtn = delete + # 
+            
+            createSrc(imgPreview, file) //sets img src
+            
+            const deleteBtn = document.createElement('p')
+            deleteBtn.className = 'delete' + number
+            deleteBtn.textContent = "X"
+            deleteBtn.onclick = handleDelete
+            
+            singleContainer.append(imgPreview, deleteBtn)
 
-            fileReader.onload = event => {
-                imgPreview.setAttribute('src', event.target.result);
-            }
-            imgPreview.src = fileReader.readAsDataURL(file[0]);
-
-            console.log(target)
-            const parent = document.querySelector('.imageContainer')
-            console.log(parent)
-            parent.appendChild(imgPreview)
+            const parent = document.querySelector('.imgContainer')
+            parent.appendChild(singleContainer)
         }
-
-        
-        
     }
-    
-    
+    function createSrc(imgPreview, file){
+        const fileReader = new FileReader();
+
+        fileReader.onload = event => {
+                imgPreview.setAttribute('src', event.target.result);
+        }
+        fileReader.readAsDataURL(file[0])
+    }
+
+    function addFile(){
+        const fileContainer = document.querySelector('.fileContainer')
+        let length = getLength(fileContainer)
+
+        const uploadImg = document.createElement('input')
+        uploadImg.type = 'file'
+        uploadImg.accept = 'image/*'
+        uploadImg.id = 'imgUpload'
+        uploadImg.className = `file${length + 1}` // ties the file input to its corresponding image preview
+        uploadImg.onchange = previewPhoto
+        fileContainer.append(uploadImg)
+    }
+    function getLength(fileContainer){
+        let length = 0
+        for(let i in fileContainer.childNodes){
+            if(fileContainer.childNodes[i].name === 'imgUpload'){
+                length ++
+            }
+        }
+        return length
+    }
+
+    function handleDelete(){ //removes img, btn, and file
+        const number = event.target.className[event.target.className.length - 1]
+        const imgContainer = document.querySelector('.imgContainer')
+        const fileContainer = document.querySelector('.fileContainer')
+        
+        const 
+            targetContainer = document.querySelector('.singleContainer' + number),
+            file = document.querySelector('.file' + number)
+
+        imgContainer.removeChild(targetContainer)
+        fileContainer.removeChild(file)
+    }    
 </script>
+
 </html>

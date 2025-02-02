@@ -1,8 +1,21 @@
 const { Router } = require('express')
 const router = Router()
-//insert controller functions..
+const path = require('node:path')
+const multer = require('multer')
+
 const {sortFilters, postCar} = require('../controllers/controller')
 const makes = require('../db/makes')
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)) //rename file to include date.. avoids naming collisions
+    }
+})
+
+const upload = multer({storage: storage})
 
 
 router.get('/', async (req, res) => {
@@ -26,9 +39,11 @@ router.get('/addCar', async (req, res) => {
     res.render('addCar', { results })
 })
 
-router.post('/', async (req, res) => {
+router.post('/',/*  upload.single('imgUpload'),  */async (req, res) => { /* MAJOR SECURITY CONCERNS */
+    //Take below later
     console.log(req)
-    console.log(req.body.imgUpload)
+    const results = await postCar(req, res)
+    res.render('addCar', { results })
     //audit entries
     //process to add new car to database or reject entry
 

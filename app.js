@@ -9,15 +9,6 @@ const assetPath = path.join(__dirname, 'public') //public assets such as stylesh
 
 app.use(express.static(assetPath))
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)) //rename file to include date.. avoids naming collisions
-    }
-})
-
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 
@@ -28,3 +19,4 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
     console.log('Listening on: ', PORT)
 })
+
