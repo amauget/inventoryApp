@@ -1,10 +1,11 @@
 function auditFileTypes(files){
+    let validFile = true
     files.forEach(file =>{
         if(!file.mimetype.includes('image/')){
-            return false
+            validFile = false
         }
     })
-    return true
+    return validFile
 }
 
 module.exports = auditFileTypes

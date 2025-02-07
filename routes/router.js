@@ -29,20 +29,23 @@ router.get('/category', async (req, res) => {
 
 router.get('/addCar', async (req, res) => {
     const results = await renderUpload(req, res)
+
     res.render('addCar', { results })
 })
 
-router.post('/', upload.any(), async (req, res) => { /* MAJOR SECURITY CONCERNS */
+router.post('/addCar', upload.any(), async (req, res) => { /* MAJOR SECURITY CONCERNS */
     if(!req.files || req.files.length === 0){
         return res.status(400).json({error: 'No files uploaded'})
     }
     if(req.files.length > 10){
         return res.status(400).json({error:"Limit of 10 images allowed. Quit changing my javascript!"})
     }
-    postCar(req, res)
 
-    const results = await postCar(req, res)
+    const fileData = await postCar(req, res, upload)
 
+
+    const results = await renderUpload(req, res)
+    //wipe storage image value to prevent duplicate posts.
     res.render('addCar', { results })
 
 })

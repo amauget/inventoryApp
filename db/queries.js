@@ -15,7 +15,6 @@ async function filterCategory(filters){
         else{
             result = await pool.query(query, [...args]) //MAKE SURE SPREADER SYNTAX USED.. OTHERWISE NESTED ARRAY COUNTS AS SINGLE ARG.
         }
-        console.log(result.rows)
         //Add handler for empty results.
         return result.rows
     }
@@ -27,7 +26,6 @@ async function filterCategory(filters){
 
 async function createOptions(){ //only call if a year has been selected.
     const result = await pool.query('SELECT * FROM make_models')
- 
     return result.rows    
 }
 
