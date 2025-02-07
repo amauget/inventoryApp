@@ -1,4 +1,6 @@
 const db = require('../db/queries') //database functions
+const auditFileTypes = require('../db/handlePost/auditFileTypes')
+const scrubFileNames = require('../db/handlePost/scrubFileNames')
 
 async function sortFilters(req, res){
     let filters = req.query //object with different filters (ie. category, year, make, etc)
@@ -8,6 +10,12 @@ async function sortFilters(req, res){
     return result
 
   
+}
+
+async function renderUpload(){
+    const suggested = await db.createOptions()
+
+    return suggested
 }
 
 async function postCar(req, res){
@@ -41,12 +49,23 @@ async function postCar(req, res){
             model: body.model
     
         }
-    const suggested = await db.createOptions()
+        const files = req.files
 
-    return suggested
+        const validFiles = auditFileTypes(files)
+        if(validFiles === true){
+            scrubFileNames(files)
+            const uploadedFiles = req.files.map(file =>({
+                fileName: file.filename,
+                path: `uploads/${file.filename}`
+            })
+            )
+        }
+        
+
 }
 
 module.exports = {
     sortFilters,
-    postCar
+    postCar, 
+    renderUpload
 }

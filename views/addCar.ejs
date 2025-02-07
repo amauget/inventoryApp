@@ -54,17 +54,18 @@
 
         <label id="descriptionLabel" for="description">Description: </label>
         <textarea name="description" id="description"></textarea> <!-- ADD REQUIRED -->
-
-        <div class="fileContainer">
-            <label id="imgUploadLabel"for="imgUpload">Upload Images of your ride:</label>
-            <input name="imgUpload" type="file" id="imgUpload" accept="image/*" onchange=previewPhoto(event.target) class="file1"> <!-- add an image previewer -->    
+        
+        <div name="imgUpload" class="imgUpload">
+            <label id="imgUploadLabel" for="imgUpload">Upload Images of your ride:</label>
+            <input id="img" name="img1" type="file" accept="image/*" onchange=previewPhoto(event.target) class="img1"> <!-- add an image previewer -->    
+    
         </div>
+    
 
         <div class="imgContainer"></div> <!-- uploaded imgs will append here to viewing -->
 
         <button class="submit">Submit</button>
     </form>
-    <button class="addFile" onclick=addFile()>Add Additional Photo</button> <!-- removed from form to prevent submit -->
 
 
     <p class="data"> <%= JSON.stringify(results) %></p> <!-- allows for front end data manipulation. Display = "none" -->
@@ -78,6 +79,8 @@
 <script>
     const carElement = document.querySelector('.data')
     const carData = JSON.parse(carElement.textContent) // immutible global
+
+    let length = 1 //declared on page load. Increase/decrease based on file uploads
 
 
     function sortMake(year){
@@ -194,38 +197,42 @@
     }
 
     function addFile(){
-        const fileContainer = document.querySelector('.fileContainer')
-        let length = getLength(fileContainer)
+        if(length < 10){
+            const imgUpload = document.querySelector('.imgUpload')
 
-        const uploadImg = document.createElement('input')
-        uploadImg.type = 'file'
-        uploadImg.accept = 'image/*'
-        uploadImg.id = 'imgUpload'
-        uploadImg.className = `file${length + 1}` // ties the file input to its corresponding image preview
-        uploadImg.onchange = previewPhoto
-        fileContainer.append(uploadImg)
-    }
-    function getLength(fileContainer){
-        let length = 0
-        for(let i in fileContainer.childNodes){
-            if(fileContainer.childNodes[i].name === 'imgUpload'){
-                length ++
-            }
+            const uploadImg = document.createElement('input')
+            uploadImg.type = 'file'
+            uploadImg.accept = 'image/*'
+            uploadImg.id = 'img'
+            uploadImg.name = `img${length + 1}` // ties the file input to its corresponding image preview
+            uploadImg.className = `img${length + 1}`
+            uploadImg.onchange = previewPhoto
+            imgUpload.append(uploadImg)
+
+            length ++
         }
-        return length
     }
+
 
     function handleDelete(){ //removes img, btn, and file
         const number = event.target.className[event.target.className.length - 1]
         const imgContainer = document.querySelector('.imgContainer')
-        const fileContainer = document.querySelector('.fileContainer')
+        const imgUpload = document.querySelector('.imgUpload')
         
         const 
             targetContainer = document.querySelector('.singleContainer' + number),
-            file = document.querySelector('.file' + number)
+            file = document.querySelector('.img' + number)
+
+        console.log(file)
 
         imgContainer.removeChild(targetContainer)
-        fileContainer.removeChild(file)
+        imgUpload.removeChild(file)
+
+        length --
+
+        if(length === 9){
+            addFile()
+        }
     }    
 </script>
 
