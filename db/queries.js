@@ -28,9 +28,16 @@ async function createOptions(){ //only call if a year has been selected.
     const result = await pool.query('SELECT * FROM make_models')
     return result.rows    
 }
+// example of posting into imgpath db.. 
+// insert into imgpath(id, path) values(1,'/img/domestic/chevelle.jpg');
 
+async function allModels(){
+    const makeRequest = await pool.query("SELECT model FROM make_models WHERE model = 'Camaro'")
+    return makeRequest.rows
+}
 
 module.exports = {
     filterCategory,
-    createOptions
+    createOptions,
+    allModels
 }

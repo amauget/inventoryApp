@@ -5,6 +5,7 @@ function scrubFileNames(files){
         file.filename = `${postID}${fileType}`
         file.path = `uploads/${file.filename}`
     })
+    return files
 }
 
 function getFileTypes(fileName){

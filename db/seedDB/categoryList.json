@@ -1,0 +1,16 @@
+{
+    "Cadillac": "domestic",
+    "Buick": "domestic",
+    "Chevrolet": "domestic",
+    "Ford": "domestic",
+    "Dodge": "domestic",
+    "Chrysler": "domestic",
+    "Toyota": "jdm",
+    "Lexus": "jdm",
+    "Mercedes": "jdm",
+    "Nissan": "jdm",
+    "BMW": "euro",
+    "Audi": "euro",
+    "Ferrari": "euro",
+    "Lamborghini": "euro"
+  }
