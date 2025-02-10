@@ -36,8 +36,20 @@ async function allModels(){
     return makeRequest.rows
 }
 
+async function postImages(image){
+    console.log(image)
+    const postQuery = 'INSERT INTO imgpath(id, path) VALUES($1, $2)'
+    const postImg = await pool.query(postQuery, [image.id, image.path])
+    return postImg
+}
+async function postData(data){
+
+}
+
 module.exports = {
     filterCategory,
     createOptions,
-    allModels
+    allModels,
+    postImages,
+    postData
 }

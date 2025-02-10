@@ -1,21 +1,14 @@
 const db = require('../db/queries') //database functions
-const auditFileTypes = require('../db/handlePost/auditFileTypes')
-const auditFileSize = require('../db/handlePost/auditFileSize')
-const scrubFile = require('../db/handlePost/scrubFile')
-const multer = require('multer')
-const path = require('path')
-const fs = require('fs')
 
+//handler functions
+const initAnalysis = require('../db/handlePost/initAnalysis')
 async function sortFilters(req, res){
     let filters = req.query //object with different filters (ie. category, year, make, etc)
 
     const result = await db.filterCategory(filters)
 
     return result
-
-  
 }
-
 async function renderUpload(){
     const suggested = await db.createOptions()
 
@@ -23,37 +16,28 @@ async function renderUpload(){
 }
 
 async function postCar(req, res, upload){
-        const files = req.files
+    const validItems =  await initAnalysis(req.files, req.body)
+    const postedArray = []
 
-        const validFiles = auditFileTypes(files)
-        const validSize = auditFileSize(files)
-        if(validFiles === true && validSize === true){
-            scrubFile(files)
+    if(validItems){
+        try{
+            const images = validItems[0], data = validItems[1]
+            const imagePostPromises = images.map(image => {
+                db.postImages(image)
+            })
+            const postedArray = await Promise.all(imagePostPromises) //prevents req 201 return before img post completes
+            const dataPosted = await db.postData(data)
 
-            try{
-                const uploadedFiles = await Promise.all(
-                    files.map( async (file) => {
-                        await fs.promises.writeFile(file.path, file.buffer)
-                        return {
-                            filename: file.filename,
-                            path: file.path
-                        }
-                    })
-                    
-                )
-                const data = req.body
-                console.log(data)
-            }
-            catch(error){
-                console.error(error)
-            }
-
+            return req.status(201)
         }
-        else{
-            return json({validFileTypes: validFiles, validFileSizes: validSize})
+        catch(err){
+            return req.status(500).json({message: 'An error occurred on the server.'})
         }
-        
-
+    }
+    else{
+        return req.status(403).json({message:'Security risk detected. Access denied.'})
+    }
+    
 }
 
 module.exports = {

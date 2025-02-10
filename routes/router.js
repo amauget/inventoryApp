@@ -4,7 +4,7 @@ const path = require('node:path')
 const multer = require('multer')
 
 const {sortFilters, postCar, renderUpload} = require('../controllers/controller')
-const makes = require('../db/makes')
+const makes = require('../db/seedDB/allMakes')
 const { privateDecrypt } = require('node:crypto')
 
 const storage = multer.memoryStorage()

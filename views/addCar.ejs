@@ -14,32 +14,31 @@
         </a>
         <h1 class="title">Get the Best Offers with Classic Car Depot</h1>
     </div>
-   
 
     <form class="carForm" action="/addCar" method="post" enctype="multipart/form-data">
         <h1 class="formTitle">Tell us about your ride!</h1>
-        <select class="year" name="year" id="year" onclick=sortMake(event.target.value)>
-            <option value="year">Year</option>
+        <select class="year" name="year" id="year" onclick=sortMake(event.target.value) required>
+            <option value="">Year</option>
             <% for(let i = 1965; i < 2001; i++){ %>
                 <option value=<%=i%>><%=i%></option>
             <%} %>
         </select>
 
         
-        <select class="make" name="make" id="makeInput" onclick=sortModel(event.target.value)>
+        <select class="make" name="make" id="makeInput" onclick=sortModel(event.target.value) required>
             <!-- if Statement unlocking make options -->
-            <option value="make">Make</option>
+            <option value="">Make</option>
         </select>
 
         <select class="model" name="model" id="modelInput" required>
             <!-- if Statement unlocking make options -->
-            <option value="model">Model</option>
+            <option value="">Model</option>
         </select>
 
         <div class="radioContainer">
             <h4 class="radioTitle">Transmission:</h4>
             <label id="autoLabel" for="auto">Automatic: </label>
-            <input id="auto" name='trans' type="radio" value="automatic" onclick=handleCheck(event.target.id)>
+            <input id="auto" name='trans' type="radio" value="auto" onclick=handleCheck(event.target.id)>
     
             <label id="manualLabel" for="manual">Manual: </label>
             <input id="manual" name="trans" type="radio" value="manual" onclick=handleCheck(event.target.id)>
@@ -48,7 +47,7 @@
 
         <div class="priceContainer">
             <label id="priceLabel" for="price">Asking Price USD: </label>
-            <input id="price" type="number" step=".01" min='1000'> <!-- ADD REQUIRED -->
+            <input id="price" type="number" step=".01" min='1000' required> <!-- ADD REQUIRED -->
     
         </div>
 
@@ -57,7 +56,7 @@
         
         <div name="imgUpload" class="imgUpload">
             <label id="imgUploadLabel" for="imgUpload">Upload Images of your ride:</label>
-            <input id="img" name="img1" type="file" accept="image/*" onchange=previewPhoto(event.target) class="img1"> <!-- add an image previewer -->    
+            <input id="img" name="img1" type="file" accept="image/*" onchange=previewPhoto(event.target) class="img1" required> <!-- add an image previewer -->    
     
         </div>
     
