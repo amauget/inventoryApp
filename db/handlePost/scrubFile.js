@@ -1,6 +1,6 @@
 function scrubFileNames(files){
-    const newName = crypto.randomUUID()
     files.forEach(file => {
+        const newName = crypto.randomUUID()
         const fileType = getFileTypes(file.originalname)
         file.filename = `${newName}${fileType}`
         file.path = `uploads/${file.filename}`

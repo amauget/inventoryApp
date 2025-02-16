@@ -7,14 +7,14 @@ const {sortFilters, postCar, renderUpload} = require('../controllers/controller'
 const makes = require('../db/seedDB/allMakes')
 const { privateDecrypt } = require('node:crypto')
 
-const storage = multer.memoryStorage()
+const storage = multer.memoryStorage() //prevents upload to server files until after the file is scrubbed/evaluated.
 const upload = multer({storage: storage})
 
 
 router.get('/', async (req, res) => {
     const results = await sortFilters(req, res)
-    
-    //const make = req.query.make
+    console.log(results)
+    const make = req.query.make
     /* Implement first filter, then add others.. */
     res.render('index', { results: results })
 })
@@ -33,7 +33,7 @@ router.get('/addCar', async (req, res) => {
     res.render('addCar', { results })
 })
 
-router.post('/addCar', upload.any(), async (req, res) => { /* MAJOR SECURITY CONCERNS */
+router.post('/addCar', upload.any(), async (req, res) => { 
     if(!req.files || req.files.length === 0){
         return res.status(400).json({error: 'No files uploaded'})
     }

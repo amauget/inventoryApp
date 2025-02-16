@@ -4,13 +4,20 @@ const cleanData = require('../db/handlePost/cleanData')
 //handler functions
 const initAnalysis = require('../db/handlePost/initAnalysis')
 const prepData = require('../db/handlePost/prepData')
+
 async function sortFilters(req, res){
     let filters = req.query //object with different filters (ie. category, year, make, etc)
 
-    const result = await db.filterCategory(filters)
+    
+    const result = await db.filterCategory(filters) //NO IMGPATH
+    //result is an array of objects
+    //iterate each obj, find ID, push to array, return array as args for imgPath
+    //request imgpath, and assign var. 
+    //integrate handler function, takes in result array, imgPath array
 
     return result
 }
+
 async function renderUpload(){
     const suggested = await db.createOptions()
 
@@ -19,7 +26,6 @@ async function renderUpload(){
 
 async function postCar(req, res, upload){
     const cleanedData = cleanData(req.body) //removes scripting characters
-
     const validItems =  await initAnalysis(req.files, cleanedData)
     const postedArray = []
 
@@ -27,11 +33,12 @@ async function postCar(req, res, upload){
         try{
             const preppedItems = await prepData(req.files, cleanedData)
             const images = preppedItems[0], data = preppedItems[1]
-            console.log(preppedItems)
+
             const imagePostPromises = images.map(image => {
                 db.postImages(image)
             })
             const postedArray = await Promise.all(imagePostPromises) //prevents req 201 return before img post completes
+
             const dataPosted = await db.postData(data)
 
             return res.status(201)
