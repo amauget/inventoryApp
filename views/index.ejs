@@ -36,9 +36,36 @@
         <a href="/addCar">Click to Add a Car!</a>
     </div>
     <div class="results">
-        <% results.forEach(item => { %>
+        <% results.map(item => { %>
         <%- include('partials/item', { item })%>
         <%})%>
+        
     </div>
 </body>
+<script>
+    const imgContainer = document.querySelector('.imgContainer')
+    
+    function toggleImg(){
+        const postID = event.target.value //assigned to buttons
+        const imgArray = JSON.parse(document.querySelector(`#Data${postID}`).textContent).imgpath
+        const img = document.querySelector(`#Img${postID}`)
+        if(event.target.textContent === 'Left'){
+            if(imgArray[img.value -1] === undefined){
+                img.value = imgArray.length -1
+            }
+            else{
+                img.value -= 1
+            }
+        }
+        else{
+            if(imgArray[img.value + 1] === undefined){
+                img.value = 0
+            }
+            else{
+                img.value += 1
+            }
+        }
+        img.src = imgArray[img.value]
+    }
+</script> 
 </html>

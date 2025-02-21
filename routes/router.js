@@ -13,10 +13,10 @@ const upload = multer({storage: storage})
 
 router.get('/', async (req, res) => {
     const results = await sortFilters(req, res)
-    // console.log(results, 'results')
+    console.log(results[0].id)
     const make = req.query.make
-    /* CONVERT IMAGES INTO A BINARY STREAM BEFORE PASSING THROUGH */
-    res.render('index', { results: results })
+
+    res.render('index', { results: results, data: JSON.stringify(results) }) // "data" for front end JS
 })
 
 router.get('/category', async (req, res) => {
