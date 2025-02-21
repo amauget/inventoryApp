@@ -13,7 +13,7 @@ const upload = multer({storage: storage})
 
 router.get('/', async (req, res) => {
     const results = await sortFilters(req, res)
-    console.log(results[0].id)
+  
     const make = req.query.make
 
     res.render('index', { results: results, data: JSON.stringify(results) }) // "data" for front end JS

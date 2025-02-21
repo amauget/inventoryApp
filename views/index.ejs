@@ -7,22 +7,21 @@
     <title>Classic Car Depot</title>
 </head>
 <body>
-    <h1>Classic Car Depot</h1>
     <div class="header">
-        <form action="/" method="GET">
-            <a href="/">
-                <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
-            </a>
+        <h1 class="title">Classic Car Depot</h1>
 
-            
-            <select name="category" id="category">
+        <a href="/" class="iconLink">
+            <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
+        </a>
+        <form action="/" method="GET" class="filters"> 
+            <select name="category" id="category" class="selectors">
                 <option value='*'>All Options</option>
                 <option value="domestic">Domestic</option>
                 <option value="jdm">JDM</option>
                 <option value="euro">Euro</option>
             </select>
 
-            <select name="make" id="make">
+            <select name="make" id="make" class="selectors">
                 <option value="*">All Makes</option>
                 <option value="Chevrolet">Chevrolet</option>
                 <option value="Toyota">Toyota</option>
@@ -30,10 +29,10 @@
             </select>
             
 
-            <button class="submit">Update Filters</button>
+            <button class="updateFilters">Update Filters</button>
         </form>
 
-        <a href="/addCar">Click to Add a Car!</a>
+        <a class="addCarLink" href="/addCar">Click to Post Your Ride</a>
     </div>
     <div class="results">
         <% results.map(item => { %>
@@ -49,7 +48,8 @@
         const postID = event.target.value //assigned to buttons
         const imgArray = JSON.parse(document.querySelector(`#Data${postID}`).textContent).imgpath
         const img = document.querySelector(`#Img${postID}`)
-        if(event.target.textContent === 'Left'){
+
+        if(event.target.id === 'left'){
             if(imgArray[img.value -1] === undefined){
                 img.value = imgArray.length -1
             }
