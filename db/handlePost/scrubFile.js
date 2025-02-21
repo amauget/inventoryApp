@@ -3,16 +3,16 @@ function scrubFileNames(files){
         const newName = crypto.randomUUID()
         const fileType = getFileTypes(file.originalname)
         file.filename = `${newName}${fileType}`
-        file.path = `${file.filename}`
+        file.path = `uploads/${file.filename}`
     })
     return files
 }
 
-function getFileTypes(fileName){
+function getFileTypes(filename){
     let filetype = []
-    for(let i = fileName.length - 1; i >= 0; i--){
-        filetype.splice(0,0, fileName[i])
-        if(fileName[i] === '.'){ //starts at end of file. '.' marks start of fileType
+    for(let i = filename.length - 1; i >= 0; i--){
+        filetype.splice(0,0, filename[i])
+        if(filename[i] === '.'){ //starts at end of file. '.' marks start of fileType
             break
         }
     }

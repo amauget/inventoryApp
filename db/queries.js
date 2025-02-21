@@ -43,7 +43,8 @@ async function allModels(){
 
 async function postImages(image){
     const postQuery = 'INSERT INTO imgpath(id, path) VALUES($1, $2)'
-    const postImg = await pool.query(postQuery, [image.id, image.path])
+
+    const postImg = await pool.query(postQuery, [image.id, image.filename])
     return postImg
 }
 async function postData(data){

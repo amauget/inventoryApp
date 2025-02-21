@@ -1,6 +1,7 @@
 const db = require('../db/queries') //database functions
 const cleanData = require('../db/handlePost/cleanData')
 const convertImgs = require('../db/handleGet/convertImgs')
+const convertChars = require('../db/handleGet/convertChars')
 
 //handler functions
 const initAnalysis = require('../db/handlePost/initAnalysis')
@@ -8,16 +9,18 @@ const prepData = require('../db/handlePost/prepData')
 
 async function sortFilters(req, res){
     let filters = req.query //object with different filters (ie. category, year, make, etc)
-    console.log(filters)
     if(filters.category === undefined){
-        console.log('no filters')
         filters = {category: '*', make: '*'}
     }
 
-    const result = await db.filterCategory(filters) 
+    const response = await db.filterCategory(filters)
     //convert img files to binary stream
-    const renderValues = convertImgs(result)
-    return renderValues
+    const data = convertImgs(response)
+    
+    const finalData = convertChars(data)
+     
+
+    return finalData
 }
 
 async function renderUpload(){
@@ -33,7 +36,7 @@ async function postCar(req, res, upload){
 
     if(validItems){
         try{
-            const preppedItems = await prepData(req.files, cleanedData)
+            const preppedItems = await prepData(req.files, cleanedData) //confirms files save before finalizing data
             const images = preppedItems[0], data = preppedItems[1]
 
             const imagePostPromises = images.map(image => {

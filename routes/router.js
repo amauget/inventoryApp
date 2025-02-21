@@ -13,7 +13,7 @@ const upload = multer({storage: storage})
 
 router.get('/', async (req, res) => {
     const results = await sortFilters(req, res)
-    console.log(results, 'results')
+    // console.log(results, 'results')
     const make = req.query.make
     /* CONVERT IMAGES INTO A BINARY STREAM BEFORE PASSING THROUGH */
     res.render('index', { results: results })
@@ -40,7 +40,7 @@ router.post('/addCar', upload.any(), async (req, res) => {
     if(req.files.length > 10){
         return res.status(400).json({error:"Limit of 10 images allowed. Quit changing my javascript!"})
     }
-    console.log(req.body)
+    
 
     const fileData = await postCar(req, res, upload)
 
