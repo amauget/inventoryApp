@@ -47,7 +47,7 @@
 
         <div class="priceContainer">
             <label id="priceLabel" for="price">Asking Price USD: </label>
-            <input id="price" type="number" step=".01" min='1000' required> <!-- ADD REQUIRED -->
+            <input id="price" name="price" type="number" step=".01" min='1000' required> <!-- ADD REQUIRED -->
     
         </div>
 
@@ -57,7 +57,6 @@
         <div name="imgUpload" class="imgUpload">
             <label id="imgUploadLabel" for="imgUpload">Upload Images of your ride:</label>
             <input id="img" name="img1" type="file" accept="image/*" onchange=previewPhoto(event.target) class="img1" required> <!-- add an image previewer -->    
-    
         </div>
     
 

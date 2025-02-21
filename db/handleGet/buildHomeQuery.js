@@ -1,35 +1,25 @@
-function buildHomeQuery(filters){
-    let query = 'SELECT * FROM cars WHERE'
-    let args = []
-    let firstFilter = true
-    let columns = ['id','category', 'year', 'make', 'trans', 'price', 'description', 'model']
-    //include id to associate with get request for associated imgs
-    let colLength = 7
-
-    let dollar = 1
-    //columns are db columns, but also the keys for "filters"
-    for(let i in columns){
-        if(filters[columns[i]] !== undefined && filters[columns[i]] !== '*'){ 
-            if(i < colLength - 1 && firstFilter === false){ //prevents "AND" after "WHERE"
-                query += ' AND'
-            }
-            else{
-                firstFilter = false
-            }
-            query += ` ${columns[i]} = $${dollar}` //dollar increments $1, $2 etc..
-            dollar += 1
-            args.push(filters[columns[i]])
+function buildHomeQuery({ category, make }){
+    const args = []
+    let query = "SELECT cars.id, cars.category, cars.year, cars.make, cars.model, cars.trans, cars.price, cars.description, COALESCE(JSON_AGG(imgpath.path) FILTER (WHERE imgpath.path IS NOT NULL), '[]') AS imgpath FROM cars LEFT JOIN imgpath ON cars.id = imgpath.id"
+    if(category !== '*'){
+        query += ' WHERE cars.category = $1'
+        args.push(category)
+    }
+    if(make !== '*'){
+        if(args.length === 0){
+            query+= ' WHERE cars.make = $1'
         }
+        else{
+            query += ' AND cars.make = $2'
+        }
+        args.push(make)
     }
-    
-    if(args.length === 0 /* || args[0] === '*' */){
-        query = 'SELECT * FROM cars'
-    }
+    query += ' GROUP BY cars.id;'
 
-    return [query += ';', args]
+    return [query, args]
     
 }
-
+buildHomeQuery({category: '*', make: 'Buick'})
 
 
 module.exports = buildHomeQuery

@@ -1,5 +1,6 @@
 const db = require('../db/queries') //database functions
 const cleanData = require('../db/handlePost/cleanData')
+const convertImgs = require('../db/handleGet/convertImgs')
 
 //handler functions
 const initAnalysis = require('../db/handlePost/initAnalysis')
@@ -7,15 +8,16 @@ const prepData = require('../db/handlePost/prepData')
 
 async function sortFilters(req, res){
     let filters = req.query //object with different filters (ie. category, year, make, etc)
+    console.log(filters)
+    if(filters.category === undefined){
+        console.log('no filters')
+        filters = {category: '*', make: '*'}
+    }
 
-    
-    const result = await db.filterCategory(filters) //NO IMGPATH
-    //result is an array of objects
-    //iterate each obj, find ID, push to array, return array as args for imgPath
-    //request imgpath, and assign var. 
-    //integrate handler function, takes in result array, imgPath array
-
-    return result
+    const result = await db.filterCategory(filters) 
+    //convert img files to binary stream
+    const renderValues = convertImgs(result)
+    return renderValues
 }
 
 async function renderUpload(){

@@ -1,10 +1,9 @@
 <div class="carContainer">
     <h1><%= item.year %></h1>
     <h1><%= item.make %> <%= item.model%></h1>
-    <img class="carImg" src= <%= item.imgpath[0] %> alt="image from array">
+    <img class="carImg" src='./uploads/3009b6bf-a351-4ae0-aed7-4fb38ff4e4ed.png' value=<%= item.imgpath[0] %> alt="image from array">
     <p><%= item.description %></p>
     <h3>Price</h3>
-
     <ul>
         <li class="bulletPoints">Year <%= item.year %></li>
         <li class="bulletPoints">Make <%= item.make %></li>

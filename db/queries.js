@@ -5,6 +5,7 @@ const buildHomeQuery = require('./handleGet/buildHomeQuery')
 async function filterCategory(filters){
     //add conditions to eventually allow for all datatypes to be filtered.
     const queryData = buildHomeQuery(filters) 
+
     let query = queryData[0]
     let args = queryData[1]
     try{
@@ -15,25 +16,6 @@ async function filterCategory(filters){
         else{
             result = await pool.query(query, [...args]) //MAKE SURE SPREADER SYNTAX USED.. OTHERWISE NESTED ARRAY COUNTS AS SINGLE ARG.
         }
-        //Add handler for empty results.
-        const testQuery = `
-        SELECT 
-            cars.id, 
-            cars.category, 
-            cars.year, 
-            cars.make, 
-            cars.model, 
-            cars.trans, 
-            cars.price, 
-            cars.description, 
-            COALESCE(JSON_AGG(imgpath.path) FILTER (WHERE imgpath.path IS NOT NULL), '[]') AS imgpath
-        FROM cars
-        LEFT JOIN imgpath ON cars.id = imgpath.id
-        GROUP BY cars.id;
-
-        `        
-        const testOutput = await pool.query(testQuery)
-        // console.log(testOutput.rows, 'here') //IT WORKS!!
     return result.rows
     }
     catch(err){
