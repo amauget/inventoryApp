@@ -47,10 +47,9 @@
 
         <div class="priceContainer">
             <label id="priceLabel" for="price">Asking Price USD: </label>
-            <input id="price" name="price" type="number" step=".01" min='1000' required> <!-- ADD REQUIRED -->
-    
+            <input id="price" name="price" type="number" step=".01" min='1000' required oninput=preventChars()> <!-- ADD REQUIRED -->
         </div>
-
+        
         <label id="descriptionLabel" for="description">Description: </label>
         <textarea name="description" id="description"></textarea> <!-- ADD REQUIRED -->
         
@@ -231,7 +230,13 @@
         if(length === 9){
             addFile()
         }
-    }    
+    }  
+
+    function preventChars(){
+        return event.target.value = event.target.value.replace(/[e.-]/g, '');
+    }
+
+  
 </script>
 
 </html>

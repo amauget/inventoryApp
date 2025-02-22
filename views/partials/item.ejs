@@ -1,6 +1,5 @@
 <div class="carContainer" >
-    <h1><%= item.year %></h1>
-    <h1><%= item.make %> <%= item.model%></h1>
+    <h1 class="itemTitle"><%= item.year %> <%= item.make %> <%= item.model%></h1>
     <div class="imgContainer">
         <img class="carImg" id="Img<%=item.id%>" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
         <% if(item.imgpath.length > 1){%>
@@ -10,16 +9,9 @@
  
     </div>
     <p><%= item.description %></p>
-    <h3>Price</h3>
-    <ul>
-        <li class="bulletPoints">Year <%= item.year %></li>
-        <li class="bulletPoints">Make <%= item.make %></li>
-        <li class="bulletPoints">Model <%= item.model %></li>
-        <li class="bulletPoints">Drive <%= item.trans %></li>
-        <li class="bulletPoints">Price $<%= item.price %></li>
-    </ul>
+    <h3>Price: <%=item.price %></h3>
+   
     <p class="data" hidden id="Data<%=item.id %>" ><%= JSON.stringify(item) %></p>
     <!-- {category, year, make, drive, price, model} -->
 </div>
-
 

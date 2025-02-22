@@ -1,3 +1,7 @@
+Fonts: "Sigmar" Header font - https://fonts.google.com/selection/embed
+
+Sample Images:
+
 DOMESTIC: 
     Camaro SS: https://www.pexels.com/photo/a-vintage-chevrolet-camaro-on-the-parking-lot-17545290/
 
