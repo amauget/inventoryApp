@@ -3,7 +3,7 @@ const router = Router()
 const path = require('node:path')
 const multer = require('multer')
 
-const {sortFilters, postCar, renderUpload, handleLogin, handleDeletePost} = require('../controllers/controller')
+const {sortFilters, postCar, renderUpload, handleLogin, handleDeletePost, handleSingleRequest} = require('../controllers/controller')
 const makes = require('../db/seedDB/allMakes')
 const { privateDecrypt } = require('node:crypto')
 
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     const results = await sortFilters(req, res)
   
     const make = req.query.make
-
+ 
     res.render('index', { results: results, data: JSON.stringify(results) }) // "data" for front end JS
 })
 
@@ -83,7 +83,6 @@ router.get('/deleteAds', async (req, res) => {
 
 router.post('/deleteAds', async (req, res) => {
     const isAdmin = await handleLogin(req, res)
-    console.log(isAdmin)
     if(isAdmin){
         const deleted = await handleDeletePost(req, res)
         let status = 201
@@ -98,5 +97,12 @@ router.post('/deleteAds', async (req, res) => {
         res.render('deleteAds', { results: results, data: JSON.stringify(results), loginFailed: true, loginFailedID: req.body.postID })
 
     }
+})
+router.post('/viewSingle', async (req, res) => {
+    const ID = req.body.data
+
+    const result = await handleSingleRequest(ID)
+    const data = result[0]
+    res.render('viewSingle', {})
 })
 module.exports = router

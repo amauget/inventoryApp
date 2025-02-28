@@ -68,7 +68,7 @@
     const attachID = document.querySelector('.postID')
     const incorrectPrompt = document.querySelector('.incorrectPrompt')
     const username = document.querySelector('.username'), password = document.querySelector('.password')
-console.log(attachID.value)
+
     if(loginFailed === 'true'){
         loginBarrier.style.display = 'block'
 
@@ -102,9 +102,12 @@ console.log(attachID.value)
         img.src = imgArray[img.value]
     }
 
-
+    function handleSubmit(){
+        event.preventDefault()
+    }
 
     function handleDelete(){
+       
         const postID = event.target.id
         
         attachID.value = postID //attach post id to login form

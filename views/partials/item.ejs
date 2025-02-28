@@ -1,19 +1,23 @@
-<div class="carContainer" >
-    <h1 class="itemTitle"><%= item.year %> <%= item.make %> <%= item.model%></h1>
-    <% if(deleteItem === true){ %>
-        <button id=<%= item.id %> class="delete" onclick=handleDelete()>Delete Post</button>
-    <%}%>
-    <div class="imgContainer">
-        <img class="carImg" id="Img<%=item.id%>" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
-        <% if(item.imgpath.length > 1){%>
-            <button class="imgToggle" id="left" value="<%= item.id %>" onclick=toggleImg()>&larr;</button>
-            <button class="imgToggle" id="right" value="<%= item.id %>" onclick=toggleImg()>&rarr;</button>
-        <%} %>
- 
-    </div>
+<form action="/viewSingle" method="post" class="carContainer" onclick=handleSubmit(this)>
+    <!-- <button class="submitContainer"> -->
+        <h1 class="itemTitle"><%= item.year %> <%= item.make %> <%= item.model%></h1>
+        <% if(deleteItem === true){ %>
+            <button id=<%= item.id %> class="delete" onclick=handleDelete()>Delete Post</button>
+        <%}%>
+        <div class="imgContainer">
+            <img class="carImg" id="Img<%=item.id%>" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
+            <% if(item.imgpath.length > 1){%>
+                <button class="imgToggle" id="left" value="<%= item.id %>" onclick=toggleImg()>&larr;</button>
+                <button class="imgToggle" id="right" value="<%= item.id %>" onclick=toggleImg()>&rarr;</button>
+            <%} %>
+     
+        </div>
+    
+        <h3 class="price">Price: <%=item.price %></h3>
+       
+        <input class="data" name='data' hidden id="Data<%=item.id %>" value=<%= item.id.toString() %>></input>
 
-    <h3 class="price">Price: <%=item.price %></h3>
-   
-    <p class="data" hidden id="Data<%=item.id %>" ><%= JSON.stringify(item) %></p>
-    <!-- {category, year, make, drive, price, model} -->
-</div>
+    <!-- </button>   -->
+    
+</form>
+

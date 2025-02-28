@@ -42,7 +42,7 @@ async function allModels(){
 }
 
 async function postImages(image){
-    const postQuery = 'INSERT INTO imgpath(id, path) VALUES($1, $2)'
+    const postQuery = 'INSERT INTO imgpath(id, imgpath) VALUES($1, $2)'
 
     const postImg = await pool.query(postQuery, [image.id, image.filename])
     return postImg
@@ -65,8 +65,18 @@ async function removePostData(postID){
     return true
 }
 async function removePostImgs(postID){
-    const loginQuery = await pool.query('DELETE FROM imgpath WHERE ID = $1', [postID])
+    const loginQuery = await pool.query('DELETE FROM imgpath WHERE id = $1', [postID])
     return true
+}
+async function singlePostData(postID){
+    const postQuery = await pool.query('SELECT * FROM cars WHERE id = $1', [postID])
+    return postQuery.rows
+}
+
+async function singlePostImg(postID) {
+    const imgQuery = await pool.query('SELECT * FROM imgpath WHERE id = $1', [postID])
+    return imgQuery.rows
+    //rewrite query to truncate tables. Imgpath should be an array.
 }
 
 module.exports = {
@@ -77,5 +87,7 @@ module.exports = {
     postData,
     checkCredentials,
     removePostData,
-    removePostImgs
+    removePostImgs,
+    singlePostData,
+    singlePostImg
 }

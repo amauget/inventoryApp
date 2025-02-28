@@ -60,7 +60,6 @@ async function postCar(req, res, upload){
 
 async function handleLogin(req, res){
     const login = cleanData(req.body)
-    console.log(login)
     const isAdmin = await db.checkCredentials(login)
     return isAdmin
 }
@@ -78,10 +77,23 @@ async function handleDeletePost(req, res){
     }
 }
 
+async function handleSingleRequest(ID){
+    const cleanedID = cleanData(ID)
+    console.log(cleanedID)
+    const data = await db.singlePostData(cleanedID)
+    const imgData = await db.singlePostImg(cleanedID)
+    console.log(imgData)
+    const imgs = convertImgs(imgData)
+    
+    // return [data, imgs]
+
+}
+
 module.exports = {
     sortFilters,
     postCar, 
     renderUpload,
     handleLogin,
-    handleDeletePost
+    handleDeletePost,
+    handleSingleRequest
 }
