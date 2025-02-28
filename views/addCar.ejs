@@ -47,7 +47,7 @@
 
         <div class="priceContainer">
             <label id="priceLabel" for="price">Asking Price USD: </label>
-            <input id="price" name="price" type="number" step=".01" min='1000' required oninput=preventChars()> <!-- ADD REQUIRED -->
+            <input id="price" name="price" type="number" step=".01" min='1000' max="1000000" required oninput=preventChars()> <!-- ADD REQUIRED -->
         </div>
         
         <label id="descriptionLabel" for="description">Description: </label>
@@ -55,7 +55,7 @@
         
         <div name="imgUpload" class="imgUpload">
             <label id="imgUploadLabel" for="imgUpload">Upload Images of your ride:</label>
-            <input id="img" name="img1" type="file" accept="image/*" onchange=previewPhoto(event.target) class="img1" required> <!-- add an image previewer -->    
+            <input id="img" name="imgUpload" type="file" accept="image/*" onchange=previewPhoto(event.target) class="img1" required> <!-- add an image previewer -->    
         </div>
     
 
@@ -154,13 +154,16 @@
     }
 
     function previewPhoto(){ 
-        const fileElement = event.target
-        fileElement.id = 'hideFile' //hide uploaded file w/ css
-        addFile() //add new input
+        const fileElement = event.target        
 
-        const file = fileElement.files
+        const ValidFile = verifyFileType(fileElement.files[0])
+
         const number = event.target.className[event.target.className.length - 1]
-        if(file){
+        if(ValidFile){
+            fileElement.id = 'hideFile' //hide uploaded file w/ css
+
+            addFile() //add new input
+            const file = fileElement.files
             const singleContainer = document.createElement('div')
             singleContainer.id = 'singleContainer'
             singleContainer.className = 'singleContainer' + number // same number as associated file and components
@@ -183,7 +186,18 @@
             const parent = document.querySelector('.imgContainer')
             parent.appendChild(singleContainer)
         }
+        else{
+            event.target.value = ''
+            alert('Only Images are permitted for upload.')
+        }
     }
+
+    function verifyFileType(file){
+        const type = file.type.split('/')[0]
+        return type === 'image' ? true : false
+    }
+
+
     function createSrc(imgPreview, file){
         const fileReader = new FileReader();
 
@@ -194,7 +208,9 @@
     }
 
     function addFile(){
-        if(length < 10){
+        const imgContainer = document.querySelector('.imgContainer')
+
+        if(imgContainer.childElementCount < 9){
             const imgUpload = document.querySelector('.imgUpload')
 
             const uploadImg = document.createElement('input')
@@ -220,14 +236,11 @@
             targetContainer = document.querySelector('.singleContainer' + number),
             file = document.querySelector('.img' + number)
 
-        console.log(file)
 
         imgContainer.removeChild(targetContainer)
         imgUpload.removeChild(file)
 
-        length --
-
-        if(length === 9){
+        if(imgContainer.childElementCount === 9){
             addFile()
         }
     }  

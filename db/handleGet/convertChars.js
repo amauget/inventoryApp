@@ -5,6 +5,8 @@ function convertChars(data){
     })
 
 }
+
+
 function htmlRestore(text) {
     return text
       .replaceAll("&amp;", "&")
@@ -14,4 +16,4 @@ function htmlRestore(text) {
       .replaceAll("&#39;", "'")
 }
 
-module.exports = convertChars
+module.exports = convertChars 

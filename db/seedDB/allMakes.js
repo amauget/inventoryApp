@@ -11,10 +11,15 @@ function allMakes(){
       "Lexus",
       "Mercedes",
       "Nissan",
+      "Plymouth",
+      'Mazda',
+      'Pontiac',
       "BMW",
       "Audi",
       "Ferrari",
-      "Lamborghini"
+      "Lamborghini",
+      'Honda',
+      'Porsche'
     ]
   return allMakes
 }

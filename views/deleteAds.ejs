@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access</title>
+    <link rel="stylesheet" href="/styles/admin.css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">ADMIN DATABASE MANAGEMENT</h1>
+        <h3 class="notice">Notice: Any deletion will require admin authentication.</h3>
+
+        <a href="/" class="iconLink">
+            <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
+        </a>
+        <form action="/deleteAds" method="GET" class="filters"> 
+            <select name="category" id="category" class="selectors">
+                <option value='*'>All Options</option>
+                <option value="domestic">Domestic</option>
+                <option value="jdm">JDM</option>
+                <option value="euro">Euro</option>
+            </select>
+
+            <select name="make" id="make" class="selectors">
+                <option value="*">All Makes</option>
+                <option value="Chevrolet">Chevrolet</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Mercedes">Mercedes</option>
+            </select>
+            
+
+            <button class="updateFilters">Update Filters</button>
+        </form>
+    </div>
+    <div class="results">
+        <% results.map(item => { %>
+        <%- include('partials/item', { item: item, deleteItem: true })%>
+        <%})%>
+        
+    </div>
+    <div class="loginBarrier" >
+        <form action="/deleteAds" method="POST" class="loginAlert"> 
+            <h2 class="loginPrompt">Credentials Required</h2>
+            <h3 class="incorrectPrompt" style="display: none;">Incorrect Username or Password</h3>
+            <button class="cancel" onclick=handleCancel()>X</button>
+            <label for="username" class="usernameLabel">Username: </label>
+            <input type="text" id='username' name="username" class="username">
+            <label for="password" class="passwordLabel">Password: </label>
+            <input type="password" id="password" name='password' class="password">
+            <input type="text" class="postID" name="postID" <% if(loginFailed === true){%>
+                value = <%=loginFailedID%>
+            <%}else{%>
+                <%= value='' %>
+            <%}%> 
+             style="display: none;"> <!-- assigned id of selected post -->
+            <button class="submit">submit</button>
+        </form>
+    </div>
+
+    <p class='loginFailed' style="display: none;"><%= loginFailed %></p>
+
+</body>
+<script>
+    const imgContainer = document.querySelector('.imgContainer')
+    const loginFailed = document.querySelector('.loginFailed').textContent
+    const loginBarrier = document.querySelector('.loginBarrier')
+    const attachID = document.querySelector('.postID')
+    const incorrectPrompt = document.querySelector('.incorrectPrompt')
+    const username = document.querySelector('.username'), password = document.querySelector('.password')
+console.log(attachID.value)
+    if(loginFailed === 'true'){
+        loginBarrier.style.display = 'block'
+
+        incorrectPrompt.style.display = 'block'
+        username.style.border = 'red solid 2px'
+        password.style.border = 'red solid 2px'
+    }
+
+    
+    function toggleImg(){
+        const postID = event.target.value //assigned to buttons
+        const imgArray = JSON.parse(document.querySelector(`#Data${postID}`).textContent).imgpath
+        const img = document.querySelector(`#Img${postID}`)
+
+        if(event.target.id === 'left'){
+            if(imgArray[img.value -1] === undefined){
+                img.value = imgArray.length -1
+            }
+            else{
+                img.value -= 1
+            }
+        }
+        else{
+            if(imgArray[img.value + 1] === undefined){
+                img.value = 0
+            }
+            else{
+                img.value += 1
+            }
+        }
+        img.src = imgArray[img.value]
+    }
+
+
+
+    function handleDelete(){
+        const postID = event.target.id
+        
+        attachID.value = postID //attach post id to login form
+
+        loginBarrier.style.display = 'block'
+        //displays login, and loginBarrier disables all non-form buttons.
+
+        
+
+    }
+
+    function handleCancel(){
+        event.preventDefault()
+        attachID.value = ''
+        loginBarrier.style.display = 'none'
+
+        loginFailed.textContent = 'false'
+        incorrectPrompt.style.display = 'none'
+
+        username.style.border = 'solid black 1px'
+        password.style.border = 'solid black 1px'
+    }
+</script> 
+
+</body>
+
+
+</html>

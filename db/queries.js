@@ -55,10 +55,27 @@ async function postData(data){
     return postedData
 }
 
+async function checkCredentials(login) {
+    const loginQuery = await pool.query('SELECT * FROM login WHERE username = $1 AND password = $2', [login.username, login.password])
+    return loginQuery.rows.length === 0 ? false : true
+}
+
+async function removePostData(postID){
+    const loginQuery = await pool.query('DELETE FROM cars WHERE id = $1', [postID])
+    return true
+}
+async function removePostImgs(postID){
+    const loginQuery = await pool.query('DELETE FROM imgpath WHERE ID = $1', [postID])
+    return true
+}
+
 module.exports = {
     filterCategory,
     createOptions,
     allModels,
     postImages,
-    postData
+    postData,
+    checkCredentials,
+    removePostData,
+    removePostImgs
 }

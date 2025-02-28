@@ -58,8 +58,30 @@ async function postCar(req, res, upload){
     }
 }
 
+async function handleLogin(req, res){
+    const login = cleanData(req.body)
+    console.log(login)
+    const isAdmin = await db.checkCredentials(login)
+    return isAdmin
+}
+
+async function handleDeletePost(req, res){
+    try{
+        const cleanedID = cleanData(req.body.postID)
+        await db.removePostData(cleanedID)
+        await db.removePostImgs(cleanedID)
+    
+        return true
+    }
+    catch(err){
+        return false
+    }
+}
+
 module.exports = {
     sortFilters,
     postCar, 
-    renderUpload
+    renderUpload,
+    handleLogin,
+    handleDeletePost
 }

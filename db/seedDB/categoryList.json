@@ -5,12 +5,19 @@
     "Ford": "domestic",
     "Dodge": "domestic",
     "Chrysler": "domestic",
-    "Toyota": "jdm",
-    "Lexus": "jdm",
-    "Mercedes": "jdm",
-    "Nissan": "jdm",
+    "Plymouth": "domestic",
+    "Pontiac": "domestic",
+
     "BMW": "euro",
     "Audi": "euro",
     "Ferrari": "euro",
-    "Lamborghini": "euro"
+    "Lamborghini": "euro",
+    "Mercedes": "euro",
+    "Porsche": "euro",
+    
+    "Toyota": "jdm",
+    "Lexus": "jdm",
+    "Nissan": "jdm",
+    "Mazda": "jdm",
+    "Honda": "jdm"
   }

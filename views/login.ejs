@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p class="incorrectLogin" ><%=incorrect%></p>
+    <h1>Admin Login</h1>
+    <form action="/loginAttempt" method="get">
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username" required>
+
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password" required>
+
+        <button class="submit">Submit</button>
+    </form>
+
+
+    <p>Grants deletion permissions.</p>
+</body>
+
+<script>
+    const incorrectLogin = document.querySelector('.incorrectLogin').textContent
+    console.log(incorrectLogin)
+    if(incorrectLogin === 'true'){
+        const body = document.querySelector('body')
+
+        let username = document.querySelector('#username')
+        let password = document.querySelector('#password')
+        
+        username.style.border = '1px solid red'
+        password.style.border = '1px solid red'
+
+        //Add invalid password prompt
+
+        const prompt = document.createElement('h3')
+        prompt.className = 'invalidPrompt'
+        prompt.textContent = 'Invalid username or password'
+        prompt.style.color = 'red'
+
+        body.append(prompt)
+
+    }
+</script>
+
+
+
+</html>

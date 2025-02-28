@@ -16,40 +16,12 @@ function convertImgs(data){ /* NOTE: REMOVE FILE DIRECTORY FROM DB... THERE IS O
             item.imgpath = convertedImgs
             return item
         })
-        
         return data
     }
     catch(err){
         console.error(err)
         return data //returns data without base64 img
     }
-
-    
-    
 }
 
-// convertImgs([
-//     {
-//       id: '45a7d9fd-b0e1-4cfa-8aae-ad0f001ba12e',
-//       category: 'jdm',
-//       year: 1996,
-//       make: 'Toyota',
-//       model: ' Supra',
-//       trans: 'auto',
-//       price: '45000.00',
-//       description: '',
-//       imgpath: [ 'b5fe07ab-9be7-4127-a6f3-8edd2bfaebaa.jpg' ]
-//     },
-//     {
-//       id: '6625ca5f-62a4-4ae7-9b87-c9b739d329f8',
-//       category: 'domestic',
-//       year: 1966,
-//       make: 'Cadillac',
-//       model: 'Catera',
-//       trans: 'auto',
-//       price: '35000.00',
-//       description: 'She Fresh!',
-//       imgpath: [ '3009b6bf-a351-4ae0-aed7-4fb38ff4e4ed.png' ]
-//     }
-//   ])
 module.exports = convertImgs

@@ -1,5 +1,8 @@
 <div class="carContainer" >
     <h1 class="itemTitle"><%= item.year %> <%= item.make %> <%= item.model%></h1>
+    <% if(deleteItem === true){ %>
+        <button id=<%= item.id %> class="delete" onclick=handleDelete()>Delete Post</button>
+    <%}%>
     <div class="imgContainer">
         <img class="carImg" id="Img<%=item.id%>" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
         <% if(item.imgpath.length > 1){%>
@@ -8,10 +11,9 @@
         <%} %>
  
     </div>
-    <p><%= item.description %></p>
-    <h3>Price: <%=item.price %></h3>
+
+    <h3 class="price">Price: <%=item.price %></h3>
    
     <p class="data" hidden id="Data<%=item.id %>" ><%= JSON.stringify(item) %></p>
     <!-- {category, year, make, drive, price, model} -->
 </div>
-
