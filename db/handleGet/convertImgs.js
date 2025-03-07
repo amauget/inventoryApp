@@ -4,7 +4,6 @@ const path = require('path')
 function convertImgs(data){ /* NOTE: REMOVE FILE DIRECTORY FROM DB... THERE IS ONLY ONE AND IT'S ESTABLISHED. */
     try{
         let convertedData = data.map(item => {
-            console.log(item)
             let convertedImgs = 
             (item.imgpath).map(file =>{
                 const imagePath = path.join(process.cwd(), './', 'uploads', file)
@@ -15,6 +14,7 @@ function convertImgs(data){ /* NOTE: REMOVE FILE DIRECTORY FROM DB... THERE IS O
                 return `data:image/png;base64,${base64Image}`
             })
             item.imgpath = convertedImgs
+       
             return item
         })
         return data

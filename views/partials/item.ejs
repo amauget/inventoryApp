@@ -14,10 +14,34 @@
         </div>
     
         <h3 class="price">Price: <%=item.price %></h3>
+        <p><%=item.description %></p>
        
-        <input class="data" name='data' hidden id="Data<%=item.id %>" value=<%= item.id.toString() %>></input>
+        <!-- i = key -->
+        <%for(let i in item){%>
+            <% if(i !== 'imgpath'){%>
+                <textarea name=<%=i%>><%= item[i] %></textarea>
+
+            <%}%>
+          
+        <%}%>
+        <a href="/item/<%= item.id %>
+            ?category=<%= encodeURIComponent(item.category) %>
+            &year=<%= item.year %>
+            &make=<%= encodeURIComponent(item.make) %>
+            &model=<%= encodeURIComponent(item.model) %>
+            &trans=<%= encodeURIComponent(item.trans) %>
+            &price=<%= item.price %>
+            &description=<%= encodeURIComponent(item.description) %>
+            &imgpath=<%= encodeURIComponent(item.imgpath) %>">
+            View Details
+        </a>
+        
 
     <!-- </button>   -->
     
 </form>
-
+<style>
+    textarea{
+        display: none;
+    }
+</style>

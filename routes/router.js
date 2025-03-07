@@ -99,10 +99,21 @@ router.post('/deleteAds', async (req, res) => {
     }
 })
 router.post('/viewSingle', async (req, res) => {
-    const ID = req.body.data
+    //images are too large to pass through a form as base64
+    const itemImages = await handleSingleRequest(req.body.id)
+    const item = {
+        id: req.body.id,
+        category: req.body.category,
+        year: req.body.year,
+        make: req.body.make,
+        model: req.body.model,
+        trans: req.body.trans,
+        price: req.body.price,
+        description: req.body.description,
+        imgpath: itemImages
+    }
 
-    const result = await handleSingleRequest(ID)
-    const data = result[0]
-    res.render('viewSingle', {})
-})
+    res.render('viewSingle', {item})
+});
+
 module.exports = router

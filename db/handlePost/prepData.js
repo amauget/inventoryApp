@@ -18,8 +18,6 @@ async function prepData(files, cleanedData){
     )
     
     if(uploadedFiles){  
-        console.log(cleanedData.make)
-        console.log(categories)
         const category = categories[cleanedData.make]
         cleanedData.id = postID 
         cleanedData.category = category

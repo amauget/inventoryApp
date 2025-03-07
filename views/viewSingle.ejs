@@ -3,9 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" href="/img/belair.png">
+    <link rel="stylesheet" href="/styles/viewSingle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+
+    <title><%=`${item.year} ${item.make} ${item.model}`%></title>
 </head>
 <body>
-    <h1><%=item%></h1>
+    <div class="header">
+        <h1 class="title">Classic Car Depot</h1>
+
+        <a href="/" class="iconLink">
+            <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
+        </a>
+        <div class="form"> <!-- filters remain for aestheics.. Grayed out to indicate disabled. -->
+            <button name="category" id="category" class="selectors">All Options</button>
+
+            <button name="make" id="make" class="selectors">Make</button>
+            
+
+            <button class="updateFilters">Update Filters</button>
+        </div>
+
+        
+
+        <a class="addCarLink" href="/addCar">Click to Post Your Ride</a>
+    </div>
+    <div class="pageContent">
+        <img class="carImg" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
+        <h1><%=`${item.make} ${item.model}`%></h1>
+        <ul class="bulletPoints">
+            <li class="year">Year: <%=item.year %></li>
+            <li class="trans">Trans: <%=item.trans%></li>
+            <li class="price">Price: <%=item.price%></li>
+    
+        </ul>
+    
+        <p class="description"><%=item.description%></p>
+    
+    </div>
+   
 </body>
+<style>
+    img{
+        max-height: 60vh;
+        max-width: 50vw;
+    }
+</style>
 </html>

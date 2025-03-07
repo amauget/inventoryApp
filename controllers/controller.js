@@ -79,14 +79,10 @@ async function handleDeletePost(req, res){
 
 async function handleSingleRequest(ID){
     const cleanedID = cleanData(ID)
-    console.log(cleanedID)
-    const data = await db.singlePostData(cleanedID)
-    const imgData = await db.singlePostImg(cleanedID)
-    console.log(imgData)
-    const imgs = convertImgs(imgData)
-    
-    // return [data, imgs]
 
+    const imgData = await db.singlePostImg(cleanedID)
+    const imgs = convertImgs(imgData)[0].imgpath
+    return imgs
 }
 
 module.exports = {
