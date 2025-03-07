@@ -18,13 +18,18 @@
         <a href="/" class="iconLink">
             <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
         </a>
-        <div class="form"> <!-- filters remain for aestheics.. Grayed out to indicate disabled. -->
-            <button name="category" id="category" class="selectors">All Options</button>
+        <div class="filters"> 
+            <select name="category" id="category" class="selectors" disabled>
+                <option class="allOptions" value='*'>All Options</option>
+              
+            </select>
 
-            <button name="make" id="make" class="selectors">Make</button>
+            <select name="make" id="make" class="selectors" disabled>
+                <option value="*">All Makes</option>
+            </select>
             
 
-            <button class="updateFilters">Update Filters</button>
+            <button class="updateFilters" disabled>Update Filters</button>
         </div>
 
         
@@ -32,24 +37,62 @@
         <a class="addCarLink" href="/addCar">Click to Post Your Ride</a>
     </div>
     <div class="pageContent">
-        <img class="carImg" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
-        <h1><%=`${item.make} ${item.model}`%></h1>
-        <ul class="bulletPoints">
-            <li class="year">Year: <%=item.year %></li>
-            <li class="trans">Trans: <%=item.trans%></li>
-            <li class="price">Price: <%=item.price%></li>
-    
-        </ul>
-    
-        <p class="description"><%=item.description%></p>
-    
+        <div class="imgContainer">
+            <img class="primaryImg" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
+
+            <div class="imgPreview">
+                <%for(let i = 0; i < item.imgpath.length; i++){%>
+                    <img id="img" class='img'+<%=i%> src=<%=item.imgpath[i]%> alt="Image preview" onclick=changePrimaryImg()>
+                <%}%>
+            </div> 
+        </div>
+        
+        <div class="textContainer">
+            <h1 class="makeModel"><%=`${item.year} ${item.make} ${item.model} - $${item.price}`%></h1>
+
+            <h3 class="specTitle">Vehicle Specifications</h3>
+            
+            <div class="specContainerParent">
+                <div id='specContainer'class="specContainer1">            
+                    <p class="label">VIN</p> <p>N/A</p>
+                </div>
+                <div id='specContainer'class="specContainer2">
+                    <p class="label">Category</p> <p><%=item.category%></p>
+
+                </div>
+                <div id='specContainer'class="specContainer3">
+                    <p class="label">Mileage</p><p>N/A</p>
+
+                </div>
+                <div id='specContainer'class="specContainer4">
+                    <p class="label">Transmission</p> <p class="trans">Trans: <%=item.trans%></p>
+
+                </div>
+              
+            </div>
+        
+            <p class="description"><%=item.description%></p>
+            <div class="mockContact">
+                <h1 class="contactSeller">Request to Contact Seller (Not for Real Use)</h1>
+                <label for="first" id="first">First Name</label>
+                <input type="text" class="first" name="first" placeholder="John">
+                <label for="last" id="last">Last Name</label>
+                <input type="text" class="last" name="last" placeholder="Doe">
+                <label for="email" id="email">Email</label>
+                <input type="email" class="email" name="email" placeholder="johndoe123411@gmail.com">
+                <textarea name="" id="message" placeholder="Your message here"></textarea>
+                <button class="submit"><p class="envelope">&#9993; </p>Submit</button>
+            </div>   
+        </div>
+             
     </div>
-   
+
 </body>
-<style>
-    img{
-        max-height: 60vh;
-        max-width: 50vw;
+<script>
+    function changePrimaryImg(){
+        const primaryImg = document.querySelector('.primaryImg')
+        primaryImg.src = event.target.src
     }
-</style>
+</script>
+
 </html>
