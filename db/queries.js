@@ -75,7 +75,6 @@ async function singlePostData(postID){
 
 async function singlePostImg(postID) {
     const imgQuery = await pool.query('SELECT ARRAY_AGG(imgpath) AS imgpath FROM imgpath WHERE id = $1',[postID])
-    console.log(imgQuery.rows)
     return imgQuery.rows
     //rewrite query to truncate tables. Imgpath should be an array.
 }

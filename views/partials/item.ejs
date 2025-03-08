@@ -1,20 +1,16 @@
 <form action="/viewSingle" method="post" class="carContainer" onclick=handleSubmit(this)>
-    <!-- <button class="submitContainer"> -->
         <h1 class="itemTitle"><%= item.year %> <%= item.make %> <%= item.model%></h1>
         <% if(deleteItem === true){ %>
             <button id=<%= item.id %> class="delete" onclick=handleDelete()>Delete Post</button>
         <%}%>
         <div class="imgContainer">
             <img class="carImg" id="Img<%=item.id%>" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
-            <% if(item.imgpath.length > 1){%>
-                <button class="imgToggle" id="left" value="<%= item.id %>" onclick=toggleImg()>&larr;</button>
-                <button class="imgToggle" id="right" value="<%= item.id %>" onclick=toggleImg()>&rarr;</button>
-            <%} %>
+  
      
         </div>
     
         <h3 class="price">Price: <%=item.price %></h3>
-        <p><%=item.description %></p>
+   
        
         <!-- i = key -->
         <%for(let i in item){%>
@@ -24,20 +20,10 @@
             <%}%>
           
         <%}%>
-        <a href="/item/<%= item.id %>
-            ?category=<%= encodeURIComponent(item.category) %>
-            &year=<%= item.year %>
-            &make=<%= encodeURIComponent(item.make) %>
-            &model=<%= encodeURIComponent(item.model) %>
-            &trans=<%= encodeURIComponent(item.trans) %>
-            &price=<%= item.price %>
-            &description=<%= encodeURIComponent(item.description) %>
-            &imgpath=<%= encodeURIComponent(item.imgpath) %>">
-            View Details
-        </a>
+
         
 
-    <!-- </button>   -->
+
     
 </form>
 <style>

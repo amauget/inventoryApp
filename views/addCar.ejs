@@ -54,15 +54,20 @@
         <textarea name="description" id="description"></textarea> <!-- ADD REQUIRED -->
         
         <div name="imgUpload" class="imgUpload">
-            <label id="imgUploadLabel" for="imgUpload">Upload Images of your ride:</label>
+            <label id="imgUploadLabel" for="imgUpload" >Upload Images of your ride:</label>
             <input id="img" name="imgUpload" type="file" accept="image/*" onchange=previewPhoto(event.target) class="img1" required> <!-- add an image previewer -->    
         </div>
     
 
-        <div class="imgContainer"></div> <!-- uploaded imgs will append here to viewing -->
 
         <button class="submit">Submit</button>
     </form>
+    <div class="output">
+        <h1 class="previewTitle">Image Preview</h1>
+        <div class="imgContainer"></div> <!-- uploaded imgs will append here to viewing -->
+
+    </div>
+
 
 
     <p class="data"> <%= JSON.stringify(results) %></p> <!-- allows for front end data manipulation. Display = "none" -->

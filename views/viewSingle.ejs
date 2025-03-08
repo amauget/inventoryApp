@@ -38,7 +38,10 @@
     </div>
     <div class="pageContent">
         <div class="imgContainer">
-            <img class="primaryImg" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
+            <div class="imgHeightSet">
+                <img class="primaryImg" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
+
+            </div>
 
             <div class="imgPreview">
                 <%for(let i = 0; i < item.imgpath.length; i++){%>

@@ -1,8 +1,16 @@
+@font-face {
+    font-family: 'kindy-script';
+    src: url('../fonts/Retrow\ Mentho.otf') format('opentype');
+    font-weight: bolder;
+    font-style: normal;
+  }
+
 .sigmar-regular {
     font-family: "Sigmar", serif;
     font-weight: 400;
     font-style: normal;
   }
+
 :root, body{
     margin: 0;
     padding: 0;

@@ -6,10 +6,9 @@ body{
     grid-template-rows: 2fr 6fr 1fr 1fr;
     max-height: 100vh;
     font-size: 1.2rem;
-    /* background-color: rgb(252, 240, 227); */
+
     background-image: url('../img/cobra.jpg');
     background-size: 100vw;
-    /* background-position-y: 20%; */
     background-repeat: no-repeat;
 }
 .background{
@@ -24,16 +23,32 @@ body{
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto;
-}
-    .icon{
-        grid-row: 1/2;
-        grid-column: 1/2;
 
-        width: 10vw;
-        border-radius: 15px;
-        align-self: center;
-        margin-left: 3rem;
+}
+.icon{
+    width: 6rem;
+    border-radius: 15px;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+
+}
+.icon:hover{
+    background: radial-gradient(circle, white, rgba(255, 255, 255, 0.301));
+    border-radius: 15px;
+    background-size: 0% 0%;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: expandRadial 0.5s ease-out forwards;
+}
+@keyframes expandRadial {
+    0% {
+    width: 6rem;
     }
+    100% {
+    width: 8rem;
+    margin:0;
+    }
+}   
     .title{
         grid-row: 1/2;
         grid-column: 2/3;
@@ -44,11 +59,11 @@ body{
 
 .carForm{
     grid-row: 2/5;
-    grid-column: 1/3;
+    grid-column: 1/2;
     display: grid;
     grid-template-rows: auto;
     justify-self: center;
-    height: 50vh;
+    height: 70vh;
     width: 40vw;
     border:solid 1px black;
     padding: 1rem;
@@ -161,25 +176,62 @@ body{
     #hideFile{
         display: none;
     }
+.output{
+    grid-row: 2/3;
+    grid-column: 2/3;
+    height: 70vh;
+    align-self: center;
+    justify-self: center;
+    border:solid 1px black;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: rgba(255, 255, 255, 0.493);
+    /* width: 40vw; */
+   
+    display: grid;
+    grid-template-columns: repeat(2, 17vw);
+    grid-template-rows: 5rem 60vh;
+    overflow-y: auto;
+
+
+}
     .imgContainer{
-        grid-row: 7/8;
-        grid-column: 1/4;
-        display: grid;
-        grid-template-columns: repeat(3, auto);
+        grid-row: 2/3;
+        grid-column: 1/3;
+        width: 34vw;
+        max-height: 60vh;
+        
+        justify-self: start;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+
         align-items: center;
         justify-content: center;
-        min-height: 35vh;
+        
+      
         gap:.5rem;
+        overflow-y: auto;
+        
+        align-self: center;
     }   
+        .previewTitle{
+            grid-row: 1/2;
+            grid-column: 1/3;
+            justify-self: center;
+        }
         #singleContainer{
+            /* grid-row: 2/3;
+            grid-column: 1/3; */
             display: grid;
             padding:0;
+            overflow-y: auto;
         }
             #imgPreview{
                 grid-row: 1/3;
                 grid-column: 1/2;
-                max-width: 35vh;
-                max-height: 35vh;
+                max-width: 15vw;
+                max-height: 25vh;
 
                 justify-self: end;
 
@@ -199,14 +251,14 @@ body{
                 background-color: rgb(255, 1, 1);
             }
     .submit{
-        /* grid-row: 8/9; */
-        grid-column: 1/3;
+        grid-row: 8/9;
+        grid-column: 1/4;
         justify-self: center;
         font-size: 1.5rem;
         border-radius: 15px;
         border: none;
         padding: 0 1rem;
-        background-color: rgba(117, 131, 255, 0.438);
+        background-color: rgba(63, 78, 216, 0.705);
         height: 2rem;
 
     }
@@ -229,10 +281,11 @@ body{
 
 
 .footer{
-    grid-row: 4/5;
-    grid-column: 1/3;
-    position: static;
+    /* grid-row: 4/5;
+    grid-column: 1/3; */
+    position: absolute;
     bottom:0;
+    left: 25vw;
     height: min-content;
     align-self: end;
     justify-self: center;

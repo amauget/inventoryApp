@@ -1,4 +1,7 @@
-Fonts: "Sigmar" Header font - https://fonts.google.com/selection/embed
+Fonts: 
+    "Sigmar" Header font - https://fonts.google.com/selection/embed
+
+    "Retrow": https://www.dafont.com/retrow-mentho.font
 
 Sample Images:
 
