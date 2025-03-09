@@ -3,16 +3,21 @@ const router = Router()
 const multer = require('multer')
 
 const {sortFilters, postCar, renderUpload, handleLogin, handleDeletePost, handleSingleRequest} = require('../controllers/controller')
+const categoryList = require('../db/seedDB/categoryList.json')
 
 const storage = multer.memoryStorage() //prevents upload to server files until after the file is scrubbed/evaluated.
 const upload = multer({storage: storage})
 
 
 router.get('/', async (req, res) => {
-    const results = await sortFilters(req, res)
+    let filters = req.query //object with different filters (ie. category, year, make, etc)
+    if(filters.category === undefined){
+        filters = {category: '*', make: '*'}
+    }
 
- 
-    res.render('index', { results: results, data: JSON.stringify(results) }) // "data" for front end JS
+    const results = await sortFilters(filters)
+
+    res.render('index', { results: results, filters: filters, data: JSON.stringify(results), categoryList: JSON.stringify(categoryList) }) // "data" for front end JS
 })
 
 router.get('/addCar', async (req, res) => {

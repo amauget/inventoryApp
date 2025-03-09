@@ -11,18 +11,12 @@ const scrubFile = require('../db/handlePost/scrubFile')
 const deleteImgFiles = require('../db/handleDeleteFiles/deleteImgFiles')
 const uploadFiles = require('../db/handlePost/uploadFiles')
 
-async function sortFilters(req, res){
-    let filters = req.query //object with different filters (ie. category, year, make, etc)
-    if(filters.category === undefined){
-        filters = {category: '*', make: '*'}
-    }
-
+async function sortFilters(filters){
     const response = await db.filterCategory(filters)
     //convert img files to binary stream
     const data = convertImgs(response)
-    
+
     const finalData = convertChars(data)
-     
 
     return finalData
 }

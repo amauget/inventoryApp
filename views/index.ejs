@@ -18,7 +18,7 @@
             <img src="/img/belair.png" alt="Belair illustration" class="icon"> <!-- starting w/ "/" indicates public folder as root for img src. -->
         </a>
         <form action="/" method="GET" class="filters"> 
-            <select name="category" id="category" class="selectors">
+            <select name="category" id="category" class="selectors" onclick=displayMakes()>
                 <option value='*'>All Options</option>
                 <option value="domestic">Domestic</option>
                 <option value="jdm">JDM</option>
@@ -27,10 +27,13 @@
 
             <select name="make" id="make" class="selectors">
                 <option value="*">All Makes</option>
-                <option value="Chevrolet">Chevrolet</option>
-                <option value="Toyota">Toyota</option>
-                <option value="Mercedes">Mercedes</option>
+                <%for(let i in JSON.parse(categoryList)){%>
+                    <option value="<%=i%>"><%=i%></option>
+                <%}%>
+              
+          
             </select>
+            <p class="allMakes" style="display: none;"><%=categoryList%></p>
             
 
             <button class="updateFilters">Update Filters</button>
@@ -79,5 +82,29 @@
         form.submit()
         // form.preventDefault()
     }
+    function displayMakes(){
+        const category = event.target.value
+        const allMakes= JSON.parse(document.querySelector('.allMakes').textContent)
+
+        const makeSelector = document.querySelector('#make')
+        makeSelector.innerHTML = ''
+        
+        const allMakeOption = document.createElement('option')
+        allMakeOption.value = '*'
+        allMakeOption.textContent = 'All Makes'
+
+        makeSelector.append(allMakeOption)
+
+        for(let i in allMakes){
+            if(allMakes[i] === category || category === '*'){
+                const option = document.createElement('option')
+                option.value = i
+                option.textContent = i
+
+                makeSelector.appendChild(option)
+            }
+        }
+    }
+    
 </script> 
 </html>
