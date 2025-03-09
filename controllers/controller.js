@@ -54,9 +54,6 @@ async function postCar(req, res, upload){
                 await Promise.all(imagePostPromises) //prevents req 201 return before img post completes
     
                 await db.postData(finalData)
-
-                console.log(uploadedImgs)
-                console.log(finalData)
     
                 return res.status(201)
             }
@@ -84,8 +81,8 @@ async function handleDeletePost(req, res){
         await db.removePostData(cleanedID)
 
         //Request all associated images for file deletion:
-        await db.getImgNames(cleanedID)
-        await 
+        const fileNames = await db.getImgNames(cleanedID)
+        await deleteImgFiles(fileNames)
 
         await db.removePostImgs(cleanedID)
 

@@ -1,4 +1,3 @@
-const fs = require('fs')
 const categories = require('../seedDB/categoryList.json') 
 // categories.json eg.-> categories["Ford"] = "Domestic"
 

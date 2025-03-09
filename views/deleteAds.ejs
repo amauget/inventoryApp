@@ -43,7 +43,6 @@
         <form action="/deleteAds" method="POST" class="loginAlert"> 
             <h2 class="loginPrompt">Credentials Required</h2>
             <h3 class="incorrectPrompt" style="display: none;">Incorrect Username or Password</h3>
-            <button class="cancel" onclick=handleCancel()>X</button>
             <label for="username" class="usernameLabel">Username: </label>
             <input type="text" id='username' name="username" class="username">
             <label for="password" class="passwordLabel">Password: </label>
@@ -55,6 +54,8 @@
             <%}%> 
              style="display: none;"> <!-- assigned id of selected post -->
             <button class="submit">submit</button>
+            <button class="cancel" onclick=handleCancel()>X</button>
+
         </form>
     </div>
 

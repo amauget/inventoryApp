@@ -39,13 +39,13 @@
     <div class="pageContent">
         <div class="imgContainer">
             <div class="imgHeightSet">
-                <img class="primaryImg" src=<%= item.imgpath[0] %> alt="image from array" value=0> 
+                <img class="primaryImg" src="<%= item.imgpath[0] %>" alt="Image not located" value=0> 
 
             </div>
 
             <div class="imgPreview">
                 <%for(let i = 0; i < item.imgpath.length; i++){%>
-                    <img id="img" class='img'+<%=i%> src=<%=item.imgpath[i]%> alt="Image preview" onclick=changePrimaryImg()>
+                    <img id="img" class='img'+<%=i%> src="<%=item.imgpath[i]%>" alt="Images Not located" onclick=changePrimaryImg()>
                 <%}%>
             </div> 
         </div>
