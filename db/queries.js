@@ -23,10 +23,10 @@ async function filterCategory(filters){
         return result.rows
     }   
 }
-async function getImgs(id){
-    const query = 'SELECT * FROM imgpath WHERE id = $1'
-    const imgs = await pool.query(query, [id])
-
+async function getImgNames(id){
+    const query = 'SELECT imgpath FROM imgpath WHERE id = $1'
+    const imgNames = await pool.query(query, [id])
+    return imgNames.rows 
 }
 
 async function createOptions(){ //only call if a year has been selected.
@@ -89,5 +89,6 @@ module.exports = {
     removePostData,
     removePostImgs,
     singlePostData,
-    singlePostImg
+    singlePostImg,
+    getImgNames
 }

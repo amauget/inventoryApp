@@ -6,6 +6,10 @@ const convertChars = require('../db/handleGet/convertChars')
 //handler functions
 const initAnalysis = require('../db/handlePost/initAnalysis')
 const prepData = require('../db/handlePost/prepData')
+const scrubFile = require('../db/handlePost/scrubFile')
+
+const deleteImgFiles = require('../db/handleDeleteFiles/deleteImgFiles')
+const uploadFiles = require('../db/handlePost/uploadFiles')
 
 async function sortFilters(req, res){
     let filters = req.query //object with different filters (ie. category, year, make, etc)
@@ -36,17 +40,27 @@ async function postCar(req, res, upload){
 
     if(validItems){
         try{
-            const preppedItems = await prepData(req.files, cleanedData) //confirms files save before finalizing data
-            const images = preppedItems[0], data = preppedItems[1]
+            const scrubbedFiles = scrubFile(req.files) 
+            const postID = crypto.randomUUID() 
 
-            const imagePostPromises = images.map(image => {
-                db.postImages(image)
-            })
-            const postedArray = await Promise.all(imagePostPromises) //prevents req 201 return before img post completes
+            const uploadedImgs = await uploadFiles(scrubbedFiles, postID) //saves to uploads directory
+            if(uploadedImgs){
+                const finalData = await prepData(cleanedData, postID) //confirms files save before finalizing data
+                
+                const imagePostPromises = uploadedImgs.map(image => { //innate error handler. If images undefined, error thrown.
+                    db.postImages(image)
+                })
+                
+                await Promise.all(imagePostPromises) //prevents req 201 return before img post completes
+    
+                await db.postData(finalData)
 
-            const dataPosted = await db.postData(data)
+                console.log(uploadedImgs)
+                console.log(finalData)
+    
+                return res.status(201)
+            }
 
-            return res.status(201)
         }
         catch(err){
             console.error(err)
@@ -68,7 +82,13 @@ async function handleDeletePost(req, res){
     try{
         const cleanedID = cleanData(req.body.postID)
         await db.removePostData(cleanedID)
+
+        //Request all associated images for file deletion:
+        await db.getImgNames(cleanedID)
+        await 
+
         await db.removePostImgs(cleanedID)
+
     
         return true
     }

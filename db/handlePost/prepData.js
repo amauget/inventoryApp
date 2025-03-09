@@ -1,28 +1,12 @@
-const scrubFile = require('./scrubFile')
 const fs = require('fs')
-const categories = require('../seedDB/categoryList.json')
+const categories = require('../seedDB/categoryList.json') 
+// categories.json eg.-> categories["Ford"] = "Domestic"
 
-async function prepData(files, cleanedData){
-    const scrubbedFiles = scrubFile(files) //sanitize file name & path
-    const postID = crypto.randomUUID() //assign an id number for the post.
-   
-    const uploadedFiles = await Promise.all( //write files to correct directory
-        scrubbedFiles.map( async (file) => { //ONLY WRITING 1 FILE
-            await fs.promises.writeFile(file.path, file.buffer)
-            return {
-                id: postID,
-                filename: file.filename,
-                path: file.path,
-            }
-        })
-    )
-    
-    if(uploadedFiles){  
-        const category = categories[cleanedData.make]
-        cleanedData.id = postID 
-        cleanedData.category = category
+async function prepData(cleanedData, postID){ //adds category, assigns post id
+    const category = categories[cleanedData.make]
+    cleanedData.id = postID 
+    cleanedData.category = category
 
-        return [uploadedFiles, cleanedData]
-    }
+    return cleanedData
 }
 module.exports = prepData
