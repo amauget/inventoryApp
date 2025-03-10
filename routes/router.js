@@ -84,9 +84,13 @@ router.post('/deleteAds', async (req, res) => {
         res.redirect('deleteAds')
     }
     else{
-        const results = await sortFilters(req, res)
+        let filters = req.query //object with different filters (ie. category, year, make, etc)
+        if(filters.category === undefined){
+            filters = {category: '*', make: '*'}
+        }
+        const results = await sortFilters(filters)
         //NEEDED: attach previous ID number to form
-        res.render('deleteAds', { results: results, data: JSON.stringify(results), loginFailed: true, loginFailedID: req.body.postID })
+        res.render('deleteAds', { results: results, data: JSON.stringify(results), loginFailed: true, loginFailedID: req.body.postID, categoryList: JSON.stringify(categoryList) })
 
     }
 })
