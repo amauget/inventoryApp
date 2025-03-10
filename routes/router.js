@@ -64,9 +64,13 @@ router.get('/loginAttempt', async (req, res) => {
 })
 
 router.get('/deleteAds', async (req, res) => {
-    const results = await sortFilters(req, res)
+    let filters = req.query //object with different filters (ie. category, year, make, etc)
+    if(filters.category === undefined){
+        filters = {category: '*', make: '*'}
+    }
+    const results = await sortFilters(filters)
     
-    res.render('deleteAds', { results: results, data: JSON.stringify(results), loginFailed: false })
+    res.render('deleteAds', { results: results, data: JSON.stringify(results), loginFailed: false, categoryList: JSON.stringify(categoryList) })
 })
 
 router.post('/deleteAds', async (req, res) => {

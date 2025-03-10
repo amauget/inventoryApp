@@ -24,9 +24,10 @@
 
             <select name="make" id="make" class="selectors">
                 <option value="*">All Makes</option>
-                <option value="Chevrolet">Chevrolet</option>
-                <option value="Toyota">Toyota</option>
-                <option value="Mercedes">Mercedes</option>
+                <%for(let i in JSON.parse(categoryList)){%>
+                    <option value="<%=i%>"><%=i%></option>
+                <%}%>
+                  
             </select>
             
 
@@ -131,6 +132,8 @@
         username.style.border = 'solid black 1px'
         password.style.border = 'solid black 1px'
     }
+
+
 </script> 
 
 </body>
