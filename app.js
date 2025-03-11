@@ -18,7 +18,7 @@ app.use((err, req, res, next) => {
     console.error(err)
     res.status(500).render('404')
 });
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 app.listen(PORT, () => {
     console.log('Listening on: ', PORT)
