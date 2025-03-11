@@ -10,20 +10,32 @@ const upload = multer({storage: storage})
 
 
 router.get('/', async (req, res) => {
-    let filters = req.query //object with different filters (ie. category, year, make, etc)
-    if(filters.category === undefined){
-        filters = {category: '*', make: '*'}
-    }
-
-    const results = await sortFilters(filters)
-
-    res.render('index', { results: results, filters: filters, data: JSON.stringify(results), categoryList: JSON.stringify(categoryList) }) // "data" for front end JS
+    // try{
+        let filters = req.query //object with different filters (ie. category, year, make, etc)
+        if(filters.category === undefined){
+            filters = {category: '*', make: '*'}
+        }
+    
+        const results = await sortFilters(filters)
+    
+        res.render('index', { results: results, filters: filters, data: JSON.stringify(results), categoryList: JSON.stringify(categoryList) }) // "data" for front end JS
+    
+    
+    // catch(err){
+    //     res.render('404')
+    // }
 })
 
 router.get('/addCar', async (req, res) => {
-    const results = await renderUpload(req, res)
+    try{
+        const results = await renderUpload(req, res)
 
-    res.render('addCar', { results })
+        res.render('addCar', { results })
+    
+    }
+    catch(error){
+        res.render('404')
+    }
 })
 
 router.post('/addCar', upload.any(), async (req, res) => { 

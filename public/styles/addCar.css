@@ -8,8 +8,8 @@ body{
     font-size: 1.2rem;
 
     background-image: url('../img/cobra.jpg');
-    background-size: 150%;
-    background-position-y: -20vw;
+    background-size: 200vh;
+    /* background-position-y: -20vw; */
     background-repeat: no-repeat;
 }
 /* .background{
@@ -66,6 +66,7 @@ body{
     justify-self: center;
     height: 70vh;
     width: 40vw;
+    min-width: fit-content;
     border:solid 1px black;
     padding: 1rem;
     margin-top: 1rem;
@@ -181,6 +182,7 @@ body{
     grid-row: 2/3;
     grid-column: 2/3;
     height: 70vh;
+    min-width: fit-content;
     align-self: center;
     justify-self: center;
     border:solid 1px black;
@@ -298,8 +300,8 @@ body{
     body{
         background-image: url('../img/cobraEmblem.jpg');
         
-        background-size: 200%;
-        background-position-x: -25vw;
+        background-size: 70vh;
+        background-position-x: -20vw;
         background-position-y: 0;
         max-width: 100vw;
         justify-content: center;
@@ -441,12 +443,3 @@ body{
 
     }
 }
-
-/* @media(max-width: 450){
-    body{
-        background-size: 400%;
-        background-position-x: -90vw;
-        background-position-y: -20vh;
-
-    }
-} */
