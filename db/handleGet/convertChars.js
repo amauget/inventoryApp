@@ -1,8 +1,14 @@
 function convertChars(data){
-    return data.map(item =>{
-        item.description = htmlRestore(item.description)
-        return item
-    })
+    try{
+        return data.map(item =>{
+            item.description = htmlRestore(item.description)
+            return item
+        })
+    }
+    catch(err){
+        return []
+    }
+   
 
 }
 
