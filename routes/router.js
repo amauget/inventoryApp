@@ -11,14 +11,14 @@ const upload = multer({storage: storage})
 
 router.get('/', async (req, res) => {
     console.log('TESTING DEPLOYMENT REQUEST')
-    let filters = req.query //object with different filters (ie. category, year, make, etc)
-    if(filters.category === undefined){
-        filters = {category: '*', make: '*'}
-    }
+    // let filters = req.query //object with different filters (ie. category, year, make, etc)
+    // if(filters.category === undefined){
+    //     filters = {category: '*', make: '*'}
+    // }
 
-    const results = await sortFilters(filters)
+    // const results = await sortFilters(filters)
 
-    res.render('index', { results: results, filters: filters, data: JSON.stringify(results), categoryList: JSON.stringify(categoryList) }) // "data" for front end JS
+    // res.render('index', { results: results, filters: filters, data: JSON.stringify(results), categoryList: JSON.stringify(categoryList) }) // "data" for front end JS
 
     
 
