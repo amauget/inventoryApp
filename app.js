@@ -1,8 +1,3 @@
-const express = require('express')
-const app = express()
-const path = require('node:path')
-const multer = require('multer')
-
 process.on('SIGTERM', () => {
     console.log('Received SIGTERM, shutting down...');
 
@@ -16,6 +11,13 @@ process.on('SIGTERM', () => {
       process.exit(1);
     }, 10000); 
 });
+
+
+const express = require('express')
+const app = express()
+const path = require('node:path')
+const multer = require('multer')
+
 
 const router = require('./routes/router')
 
