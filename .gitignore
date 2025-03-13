@@ -2,4 +2,3 @@ node_modules
 .env
 populateDB.js
 public/frontEndJS
-uploads

@@ -12,10 +12,4 @@ async function safeQuery(text, args = []){
     }
 }
 
-async function testDB(){
-    const result = await pool.query('select * from cars;')
-    console.log(result.rows)
-}
-testDB()
-
 module.exports = safeQuery
