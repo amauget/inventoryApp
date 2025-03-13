@@ -1,19 +1,16 @@
-console.log('top of router.js')
 const { Router } = require('express')
 const router = Router()
-console.log('multer')
 const multer = require('multer')
 
-console.log('import module functions')
 const {sortFilters, postCar, renderUpload, handleLogin, handleDeletePost, handleSingleRequest} = require('../controllers/controller')
 
-console.log('import json')
 const categoryList = require('../db/seedDB/categoryList.json')
-
-console.log('multer functions')
 const storage = multer.memoryStorage() //prevents upload to server files until after the file is scrubbed/evaluated.
 const upload = multer({storage: storage})
 
+router.get('/test', (req,res) =>{
+    console.log('request received!')
+}
 
 router.get('/', async (req, res) => {
     console.log('TESTING DEPLOYMENT REQUEST')
