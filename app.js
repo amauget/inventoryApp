@@ -32,7 +32,7 @@ console.log('app.use(express.urlencoded({ extended: true }))')
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 
-console.log('app.use('/', router)')
+console.log(router)
 app.use('/', router)
 
 app.use((err, req, res, next) => {
