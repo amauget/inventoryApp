@@ -10,7 +10,7 @@ const upload = multer({storage: storage})
 
 router.get('/test', (req,res) =>{
     console.log('request received!')
-}
+})
 
 router.get('/', async (req, res) => {
     console.log('TESTING DEPLOYMENT REQUEST')
