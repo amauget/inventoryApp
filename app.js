@@ -13,6 +13,7 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) =>{
     console.log('testing')
+    res.render('404')
 })
 // app.use('/', router)
 
