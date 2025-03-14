@@ -136,6 +136,7 @@ body{
     grid-template-rows:repeat(2, fit-content) ;
     min-width: 32vw;
     max-width: 32vw;
+    max-height: 35vh;
     justify-self: center;
     justify-content: center;
     border: solid 1px rgb(201, 201, 201);

@@ -10,7 +10,6 @@ const upload = multer({storage: storage})
 
 
 router.get('/', async (req, res) => {
-    // try{
         let filters = req.query //object with different filters (ie. category, year, make, etc)
         if(filters.category === undefined){
             filters = {category: '*', make: '*'}
@@ -19,11 +18,6 @@ router.get('/', async (req, res) => {
         const results = await sortFilters(filters)
     
         res.render('index', { results: results, filters: filters, data: JSON.stringify(results), categoryList: JSON.stringify(categoryList) }) // "data" for front end JS
-    
-    
-    // catch(err){
-    //     res.render('404')
-    // }
 })
 
 router.get('/addCar', async (req, res) => {
@@ -39,7 +33,6 @@ router.get('/addCar', async (req, res) => {
 })
 
 router.post('/addCar', upload.any(), async (req, res) => { 
-    //PRICE INPUT HAS A BUG
     if(!req.files || req.files.length === 0){
         return res.status(400).json({error: 'No files uploaded'})
     }
@@ -53,7 +46,6 @@ router.post('/addCar', upload.any(), async (req, res) => {
 
     const fileData = await postCar(req, res, upload)
 
-    //wipe storage image value to prevent duplicate posts.
     const results = await sortFilters(req, res)
     res.redirect('/')
 
@@ -101,7 +93,6 @@ router.post('/deleteAds', async (req, res) => {
             filters = {category: '*', make: '*'}
         }
         const results = await sortFilters(filters)
-        //NEEDED: attach previous ID number to form
         res.render('deleteAds', { results: results, data: JSON.stringify(results), loginFailed: true, loginFailedID: req.body.postID, categoryList: JSON.stringify(categoryList) })
 
     }
