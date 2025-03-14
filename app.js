@@ -3,8 +3,7 @@ const app = express()
 const path = require('node:path')
 
 const router = require('./routes/router')
-try{
-    
+ 
 const assetPath = path.join(__dirname, 'public') //public assets such as stylesheets
 
 app.use(express.static(assetPath))
@@ -26,7 +25,5 @@ const PORT = process.env.PORT || 8080
 app.listen(PORT, '0.0.0.0', () => {
   console.log('Listening on: ', PORT)
 });
-catch(error){
-    console.error(error)
-}
+
 
