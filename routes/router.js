@@ -1,13 +1,13 @@
 const { Router } = require('express')
 const router = Router()
-// const multer = require('multer')
+const multer = require('multer')
 
-// const {sortFilters, postCar, renderUpload, handleLogin, handleDeletePost, handleSingleRequest} = require('../controllers/controller')
+const {sortFilters, postCar, renderUpload, handleLogin, handleDeletePost, handleSingleRequest} = require('../controllers/controller')
 
 
 const storage = multer.memoryStorage() //prevents upload to server files until after the file is scrubbed/evaluated.
 const upload = multer({storage: storage})
-
+const categoryList = require('../db/seedDB/categoryList.json')
 
 router.get('/', async (req, res) => {
         let filters = req.query //object with different filters (ie. category, year, make, etc)
