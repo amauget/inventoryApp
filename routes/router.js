@@ -8,11 +8,14 @@ const router = Router()
 // const storage = multer.memoryStorage() //prevents upload to server files until after the file is scrubbed/evaluated.
 // const upload = multer({storage: storage})
 console.log('test')
-router.get('/', (req,res) =>{
-    console.log('request received!')
-    res.render('404')
-})
+router.get('/', (req, res) => {
+    console.log('request received at /');
+    res.send('Hello, Railway!');
+});
 
+router.get('/test', (req, res) => {
+    res.send('test request receieved')
+})
 // router.get('/', async (req, res) => {
 //     console.log('TESTING DEPLOYMENT REQUEST')
     // let filters = req.query //object with different filters (ie. category, year, make, etc)
