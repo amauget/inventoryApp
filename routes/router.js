@@ -7,8 +7,8 @@ const router = Router()
 // const categoryList = require('../db/seedDB/categoryList.json')
 // const storage = multer.memoryStorage() //prevents upload to server files until after the file is scrubbed/evaluated.
 // const upload = multer({storage: storage})
-
-router.get('/test', (req,res) =>{
+console.log('test')
+router.get('/', (req,res) =>{
     console.log('request received!')
 })
 
