@@ -10,6 +10,7 @@ const router = Router()
 console.log('test')
 router.get('/', (req,res) =>{
     console.log('request received!')
+    res.render('404')
 })
 
 // router.get('/', async (req, res) => {
