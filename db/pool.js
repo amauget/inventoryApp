@@ -8,7 +8,6 @@ const pool = new Pool({
     rejectUnauthorized: false,
   }
 })
-
 // const pool = new Pool({
 //   host: process.env.PGHOST,
 //   user: process.env.PGUSER,

@@ -55,7 +55,7 @@ async function postCar(req, res, upload){
         }
         catch(err){
             console.error(err)
-            return res.status(500).json({message: 'An error occurred on the server.'})
+            return res.status(500).json({message: 'The following error has occurred on the server: ' + err})
         }
     }
     else{
