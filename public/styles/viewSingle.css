@@ -311,6 +311,7 @@ body{
             display: flex;
             justify-content: center;
             align-items: center;
+            gap:.5rem;
         }
             .envelope{
                 padding: 0;
@@ -333,6 +334,10 @@ body{
             }
                 .icon{
                     width: 5rem;
+                }
+                .icon:hover{
+                    width: 5rem;
+                    animation: none;
                 }
                 .title{
                     grid-row: 2/3;
@@ -407,6 +412,7 @@ body{
                     max-width: 92vw;
                     justify-self: center;
                     margin-left: 0;
+            
                 }
                     .makeModel{
                         font-size: 1.2rem;
@@ -419,9 +425,11 @@ body{
                     }
                 .description{
                     min-width: 75vw;
+                    
                     font-size: .8rem;
                     max-height: 11rem;
                     justify-self: center;
+                    align-self: center;
                     margin-top: 0;
                 }
             .mockContact{

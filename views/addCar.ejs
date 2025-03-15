@@ -17,7 +17,7 @@
 
     <form class="carForm" action="/addCar" method="post" enctype="multipart/form-data">
         <h1 class="formTitle">Tell us about your ride!</h1>
-        <select class="year" name="year" id="year" onclick=sortMake(event.target.value) required>
+        <select class="year" name="year" id="year" onchange=sortMake(event.target.value) required> <!-- onclick didn't register in mobile -->
             <option value="">Year</option>
             <% for(let i = 1965; i < 2001; i++){ %>
                 <option value=<%=i%>><%=i%></option>
@@ -25,7 +25,7 @@
         </select>
 
         
-        <select class="make" name="make" id="makeInput" onclick=sortModel(event.target.value) required>
+        <select class="make" name="make" id="makeInput" onchange=sortModel(event.target.value) required>
             <!-- if Statement unlocking make options -->
             <option value="">Make</option>
         </select>

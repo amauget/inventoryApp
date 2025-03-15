@@ -313,6 +313,9 @@ body{
         .icon{
             width: 20vw;
         }
+        .icon:hover{
+            animation: none;
+        }
         .title{
             display: none;
         }

@@ -229,6 +229,11 @@ body{
             .icon{
                 width: 5rem;
             }
+            .icon:hover{
+                width: 5rem;
+                animation: none;
+            }
+             
             .title{
                 grid-row: 2/3;
                 grid-column: 2/4;
@@ -264,6 +269,7 @@ body{
             .carContainer{
                 grid-template-columns: fit-content;
                 max-width: 46vw;
+                max-height: 70vh;
             }
                 .imgContainer{
                     grid-column: 1/2;
