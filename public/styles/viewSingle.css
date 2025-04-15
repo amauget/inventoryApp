@@ -13,7 +13,7 @@
 :root, body{
     margin: 0;
     padding: 0;
-    font-size: 1.5 rem;
+    font-size: clamp(10px, .5vw + .5rem, 14px)
 }
 body{
     display: grid;
@@ -31,7 +31,7 @@ body{
     background: linear-gradient(to bottom, white, rgb(78, 78, 78));
     position: sticky;
     top: 0;
-    max-height: 13vh;
+    max-height: fit-content;
 }   .iconLink{
         grid-column: 1/2;
         grid-row: 1/3;
@@ -81,6 +81,8 @@ body{
             background-color:  rgba(0, 0, 0, 0.664);
             color: rgb(128, 128, 128);
             margin-bottom: .6rem;
+            font-size:1rem;
+            padding:0;
         }
         .selectors{
             align-self: end;
@@ -88,7 +90,7 @@ body{
         }
         
         .updateFilters{
-            width: 7rem;
+            width: 10vw;
             background-color: rgb(61, 61, 61);
         }
 
@@ -142,14 +144,14 @@ body{
     
     }
         .imgHeightSet{
-            min-height: 70vh;
-            max-height: 70vh;
+            min-height: 65vh;
+            max-height: 65vh;
             display: flex;
             align-items: center;
         }
             .primaryImg{
                 max-width: 50vw;
-                max-height: 70vh;
+                max-height: 65vh;
                 min-height: 50vh;
             }
         .imgPreview{
@@ -167,7 +169,7 @@ body{
 
             #img{
                 max-height: 10vh;
-                max-width: 10vw;
+                max-width: 10vh;
                 border: rgba(255, 255, 255, 0) solid 1px;
             }
             #img:hover{
@@ -183,7 +185,7 @@ body{
         background-color: rgb(253, 241, 225);
         justify-self: center;
         align-self: center;
-        min-height: 55vh;
+        min-height: 75vh;
         min-width: 20vw;
         border-radius: 15px;
         
@@ -239,6 +241,8 @@ body{
                 grid-column: 2/3;
             }
         .description{
+            align-self:center;
+            text-align:center;
             margin-left: 1rem;
             margin-right: 1rem;
             margin-top: 2.5rem;
