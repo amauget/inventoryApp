@@ -80,12 +80,13 @@
 
 <script>
     const carElement = document.querySelector('.data')
-    const carData = JSON.parse(carElement.textContent) // immutible global
 
     let length = 1 //declared on page load. Increase/decrease based on file uploads
 
 
     function sortMake(year){
+        const carData = JSON.parse(carElement.textContent) 
+
         if(year !== 'year'){
             const makeSelect = document.querySelector('.make')
             
@@ -110,6 +111,8 @@
     }
 
     function sortModel(make){
+        const carData = JSON.parse(carElement.textContent) 
+
         let modelSelect = document.querySelector('.model')
         let models = []
         
